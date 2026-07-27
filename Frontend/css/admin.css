@@ -1,0 +1,436 @@
+/* ==========================================================================
+   ADMIN WORKSPACE ISOLATION MATRIX (admin_styles.css)
+   ========================================================================== */
+
+/* Structural Namespace Wrapper */
+.admin-scope {
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 260px; /* Offset for the fixed sidebar */
+}
+
+/* Admin Metric Matrix Layout */
+.admin-scope .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.admin-scope .metric-card {
+    background-color: var(--sidebar-bg);
+    border: 1px solid #1e293b;
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-scope .metric-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+}
+
+.admin-scope .metric-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.admin-scope .metric-info h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 4px 0;
+}
+
+.admin-scope .metric-info p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Master/Detail Dashboard Split Grid */
+.admin-scope .admin-split-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 30px;
+    margin-top: 35px;
+}
+
+@media (max-width: 992px) {
+    .admin-scope .admin-split-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-scope .admin-panel-card {
+    background-color: var(--sidebar-bg);
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.admin-scope .admin-panel-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Pipeline Notification Items */
+.admin-scope .notification-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-scope .noti-item {
+    background-color: var(--bg-dark);
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    gap: 12px;
+}
+
+.admin-scope .noti-item.alert-unread {
+    border-left: 3px solid var(--accent-blue);
+}
+
+/* Deadline Roadmap Tracking Rows */
+.admin-scope .deadline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-dark);
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+}
+
+.admin-scope .deadline-meta h5 {
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    margin: 0 0 4px 0;
+}
+
+.admin-scope .deadline-meta span {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.admin-scope .days-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.admin-scope .badge-urgent { background: rgba(239, 68, 68, 0.08); color: #ef4444; }
+.admin-scope .badge-warning { background: rgba(245, 158, 11, 0.08); color: #f59e0b; }
+
+/* ==========================================================================
+   ADMIN NAVIGATION & SIDEBAR SYSTEM STYLES
+   ========================================================================== */
+
+/* Top Horizontal Navbar Container */
+.admin-scope .admin-top-navbar {
+    height: 70px;
+    background-color: var(--sidebar-bg);
+    border-bottom: 1px solid #1e293b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.admin-scope .admin-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-scope .admin-brand-icon {
+    font-size: 22px;
+    color: #ef4444; /* Distinguishing crimson accent for admin mode */
+}
+
+.admin-scope .brand-main {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+.admin-scope .brand-badge {
+    font-size: 9px;
+    font-weight: 600;
+    color: #ef4444;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: -2px;
+}
+
+.admin-scope .admin-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Operational Pulse Indicators */
+.admin-scope .system-status-pill {
+    background-color: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-scope .status-indicator-pulse {
+    width: 6px;
+    height: 6px;
+    background-color: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.admin-scope .status-text {
+    font-size: 11px;
+    font-weight: 500;
+    color: #10b981;
+}
+
+/* User Admin Profile Badge */
+.admin-scope .admin-profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-scope .admin-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+    font-size: 13px;
+}
+
+.admin-scope .admin-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+/* Vertical Sidebar Layout Styles */
+.admin-scope .admin-sidebar-nav {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid #1e293b;
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    padding: 35px 20px 25px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 999;
+}
+
+.admin-scope .sidebar-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 15px;
+    padding-left: 12px;
+}
+
+.admin-scope .sidebar-link-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 14px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: all 0.2s ease;
+}
+
+.admin-scope .sidebar-link-item i {
+    font-size: 15px;
+    width: 20px;
+    text-align: center;
+}
+
+.admin-scope .sidebar-link-item:hover {
+    background-color: var(--sidebar-hover);
+    color: white;
+}
+
+.admin-scope .sidebar-link-item.active-route {
+    background-color: rgba(239, 68, 68, 0.05);
+    border-left: 3px solid #ef4444;
+    color: white;
+    padding-left: 11px; /* Offset original padding due to borders */
+}
+
+/* Sidebar Counter Metadata Tags */
+.admin-scope .sidebar-counter-tag {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+}
+
+.admin-scope .count-blue { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.admin-scope .count-green { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.admin-scope .count-purple { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+
+/* Exit Action Routing Group */
+.admin-scope .sidebar-exit-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-top: 1px solid #1e293b;
+    color: #94a3b8;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-scope .sidebar-exit-btn:hover {
+    color: #ef4444;
+}
+/* ==========================================================================
+   21. REPOSITORY MANAGER WORKSPACE STYLES (manRep)
+   ========================================================================= */
+.admin-scope .admin-data-table tbody tr:hover {
+    background-color: rgba(30, 41, 59, 0.4);
+}
+
+.admin-scope .allocation-target-item {
+    background: var(--bg-dark);
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 15px;
+}
+
+.admin-scope .allocation-target-item:hover {
+    border-color: #334155;
+    background-color: rgba(30, 41, 59, 0.2);
+}
+
+.admin-scope .allocation-target-item.active-allocation-target {
+    border-color: #ef4444; /* Highlights target choice in admin scope */
+    background-color: rgba(239, 68, 68, 0.02);
+}
+
+.admin-scope .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.admin-scope select:focus {
+    border-color: #ef4444 !important;
+    outline: none;
+}
+/* ==========================================================================
+   22. SCHEDULE CONSOLE MATRIX STYLES (schedule.php)
+   ========================================================================== */
+.admin-scope .sched-chip {
+    background-color: var(--sidebar-bg);
+    border: 1px solid #1e293b;
+    color: var(--text-muted);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-scope .sched-chip:hover, 
+.admin-scope .sched-chip.active-sched-filter {
+    background-color: var(--sidebar-hover);
+    border-color: #ef4444; /* Synchronized with Admin Core highlight colors */
+    color: white;
+}
+
+.admin-scope .admin-schedule-table tbody tr:hover {
+    background-color: rgba(30, 41, 59, 0.4);
+}
+
+.admin-scope .admin-schedule-table th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+/* ==========================================================================
+   23. FINANCIAL LEDGER MATRIX STYLES (financial.php)
+   ========================================================================== */
+.admin-scope .admin-financial-table tbody tr:hover {
+    background-color: rgba(30, 41, 59, 0.4);
+}
+
+.admin-scope .admin-financial-table th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.admin-scope #ledgerSearchInput:focus {
+    border-color: #ef4444;
+    outline: none;
+}
