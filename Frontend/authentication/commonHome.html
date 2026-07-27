@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STATRICS — Where Data Meets Doers</title>
+<meta name="description" content="STATRICS is the marketplace connecting statistical workers with people who need statistical work done.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/commenHome.css">
+</head>
+<body class="stx-page">
+
+<!-- ============ BACKGROUND LAYERS ============ -->
+<div class="stx-bg" aria-hidden="true">
+  <div class="stx-bg__grid"></div>
+  <div class="stx-bg__blob stx-bg__blob--gold"></div>
+  <div class="stx-bg__blob stx-bg__blob--cyan"></div>
+  <svg class="stx-bg__plot" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <line x1="0" y1="620" x2="1200" y2="620" class="stx-bg__axis"/>
+    <line x1="80" y1="0" x2="80" y2="800" class="stx-bg__axis"/>
+    <path id="stx-trendpath" class="stx-bg__trend" d="M80,600 C 260,560 340,520 430,470 C 540,410 620,360 720,300 C 840,230 980,170 1160,110"/>
+    <g class="stx-bg__dots">
+      <circle cx="140" cy="560" r="4"/>
+      <circle cx="210" cy="580" r="3"/>
+      <circle cx="290" cy="530" r="5"/>
+      <circle cx="360" cy="500" r="3"/>
+      <circle cx="440" cy="470" r="4"/>
+      <circle cx="520" cy="430" r="3"/>
+      <circle cx="600" cy="400" r="5"/>
+      <circle cx="690" cy="350" r="3"/>
+      <circle cx="770" cy="310" r="4"/>
+      <circle cx="860" cy="270" r="3"/>
+      <circle cx="950" cy="220" r="5"/>
+      <circle cx="1040" cy="170" r="3"/>
+      <circle cx="1130" cy="120" r="4" class="stx-bg__dot--signal"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="stx-nav" id="stx-nav">
+  <div class="stx-shell stx-nav__row">
+    <a href="#stx-top" class="stx-logo" aria-label="STATRICS home">
+      <svg class="stx-logo__mark" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <polyline points="3,27 10,20 16,24 22,13 31,6" class="stx-logo__line"/>
+        <circle cx="3" cy="27" r="2.2" class="stx-logo__dot"/>
+        <circle cx="10" cy="20" r="2.2" class="stx-logo__dot"/>
+        <circle cx="16" cy="24" r="2.2" class="stx-logo__dot"/>
+        <circle cx="22" cy="13" r="2.2" class="stx-logo__dot"/>
+        <circle cx="31" cy="6" r="3" class="stx-logo__dot stx-logo__dot--signal"/>
+      </svg>
+      <span class="stx-logo__word">STAT<span class="stx-logo__accent">RICS</span></span>
+    </a>
+
+    <nav class="stx-nav__links" aria-label="Primary">
+      <a href="#stx-about">About</a>
+      <a href="#stx-services">Services</a>
+      <a href="#stx-numbers">Numbers</a>
+      <a href="#stx-contact">Contact</a>
+    </nav>
+
+    <div class="stx-nav__actions">
+      <a class="stx-btn stx-btn--ghost" data-stx-open-auth="login" type="button" href="../User_Feature/userLogin.php">Log in</a>
+      <a class="stx-btn stx-btn--ghost" data-stx-open-auth="register" type="button" href="../User_Feature/userRegister.php">Register</a>
+      <button class="stx-nav__burger" id="stx-burger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="stx-nav__mobile" id="stx-nav-mobile" aria-label="Mobile">
+    <a href="#stx-about">About</a>
+    <a href="#stx-">Services</a>
+    <a href="#stx-numbers">Numbers</a>
+    <a href="#stx-contact">Contact</a>
+    <button class="stx-btn stx-btn--ghost" data-stx-open-auth="login" type="button" href="../User_Feature/userLogin.php">Log in</button>
+    <button class="stx-btn stx-btn--solid" data-stx-open-auth="register" type="button" href="../User_Feature/userRegister.php">Register</button>
+  </nav>
+</header>
+
+<main id="stx-top">
+
+  <!-- ============ HERO ============ -->
+  <section class="stx-hero stx-shell">
+    <p class="stx-eyebrow stx-reveal">A MARKETPLACE FOR STATISTICAL WORK</p>
+
+    <h1 class="stx-hero__title">
+      <span class="stx-word" style="--d:0">S</span><span class="stx-word" style="--d:1">T</span><span class="stx-word" style="--d:2">A</span><span class="stx-word" style="--d:3">T</span><span class="stx-word" style="--d:4">R</span><span class="stx-word" style="--d:5">I</span><span class="stx-word" style="--d:6">C</span><span class="stx-word" style="--d:7">S</span>
+    </h1>
+
+    <p class="stx-hero__tagline stx-reveal">
+      Your data. Their expertise. One regression line apart.<br class="stx-hero__br">
+      Post a problem or pick one up — STATRICS is where analysts and answer-seekers meet.
+    </p>
+
+    <!-- Primary role selection: the core action of this page -->
+    <div class="stx-roles stx-reveal" id="stx-roles">
+      <a class="stx-role stx-role--worker" href="../worker/workerMyProjects.php">
+        <span class="stx-role__badge">01</span>
+        <span class="stx-role__icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="40" height="40">
+            <path d="M8 30 L16 20 L22 25 L32 10" class="stx-role__spark"/>
+            <circle cx="8" cy="30" r="2"/><circle cx="16" cy="20" r="2"/><circle cx="22" cy="25" r="2"/><circle cx="32" cy="10" r="2.4" class="stx-role__signal"/>
+          </svg>
+        </span>
+        <span class="stx-role__label">I'm a Worker</span>
+        <span class="stx-role__desc">Pick up analysis projects, showcase your methods, get paid for your rigor.</span>
+        <span class="stx-role__cta">Enter as Worker <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+      </a>
+
+      <a class="stx-role stx-role--user" href="../User_Feature/home.php">
+        <span class="stx-role__badge">02</span>
+        <span class="stx-role__icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="40" height="40">
+            <rect x="7" y="22" width="5" height="10" class="stx-role__bar"/>
+            <rect x="17" y="14" width="5" height="18" class="stx-role__bar"/>
+            <rect x="27" y="6" width="5" height="26" class="stx-role__bar stx-role__bar--signal"/>
+          </svg>
+        </span>
+        <span class="stx-role__label">I'm a User</span>
+        <span class="stx-role__desc">Bring your dataset or question, get matched with a statistician who fits.</span>
+        <span class="stx-role__cta">Enter as User <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+      </a>
+    </div>
+
+    <p class="stx-hero__hint stx-reveal">Not sure yet? <a href="#stx-about">Read what STATRICS does ↓</a></p>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="stx-about stx-shell" id="stx-about">
+    <div class="stx-about__text stx-reveal">
+      <p class="stx-eyebrow">ABOUT STATRICS</p>
+      <h2 class="stx-h2">Two sides of the same dataset.</h2>
+      <p class="stx-p">
+        STATRICS exists because good statistics is scarce and good problems are everywhere.
+        On one side are researchers, students, and businesses sitting on data they can't quite
+        interrogate. On the other are statisticians who can — but need a place to be found.
+      </p>
+      <p class="stx-p">
+        We built a single home for both: a place to post a problem, claim a project, and
+        get from raw numbers to a defensible answer, with the working shown, not hidden.
+      </p>
+      <ul class="stx-checklist">
+        <li>Verified statistical workers, reviewed by past clients</li>
+        <li>Transparent scope, timeline, and pricing before work begins</li>
+        <li>Every deliverable includes method notes, not just results</li>
+      </ul>
+    </div>
+    <div class="stx-about__panel stx-reveal" aria-hidden="true">
+      <div class="stx-card-stat">
+        <span class="stx-card-stat__label">coefficient</span>
+        <span class="stx-card-stat__value">β = 0.842</span>
+        <span class="stx-card-stat__sub">p &lt; 0.001, R² = 0.79</span>
+        <svg viewBox="0 0 200 70" class="stx-card-stat__spark">
+          <polyline points="0,55 25,48 50,50 75,35 100,38 125,20 150,24 175,8 200,12" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="stx-services" id="stx-services">
+    <div class="stx-shell">
+      <p class="stx-eyebrow stx-reveal">SERVICES ON STATRICS</p>
+      <h2 class="stx-h2 stx-reveal">Work that gets requested, again and again.</h2>
+
+      <div class="stx-service-grid">
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">Σ</span>
+          <h3>Data Analysis &amp; Interpretation</h3>
+          <p>Cleaning, exploring, and translating raw data into findings you can act on.</p>
+        </article>
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">β</span>
+          <h3>Regression &amp; Predictive Modeling</h3>
+          <p>From simple linear models to multivariate and logistic regression, done properly.</p>
+        </article>
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">χ²</span>
+          <h3>Hypothesis Testing</h3>
+          <p>T-tests, ANOVA, chi-square — the right test, the right assumptions, checked.</p>
+        </article>
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">π</span>
+          <h3>Survey Design &amp; Sampling</h3>
+          <p>Questionnaires and sampling frames built to hold up under peer review.</p>
+        </article>
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">⟨x⟩</span>
+          <h3>Data Visualization</h3>
+          <p>Charts and dashboards that make an argument, not just display numbers.</p>
+        </article>
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">R</span>
+          <h3>R / Python / SPSS Programming</h3>
+          <p>Reproducible scripts and notebooks handed over with your results.</p>
+        </article>
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">§</span>
+          <h3>Report &amp; Thesis Support</h3>
+          <p>Methodology write-ups and results sections, written to survive a defense.</p>
+        </article>
+        <article class="stx-service stx-reveal">
+          <span class="stx-service__mark">μ</span>
+          <h3>Statistical Consulting</h3>
+          <p>An hour with an expert before you commit to a method or a sample size.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NUMBERS / STATS BAND ============ -->
+  <section class="stx-numbers" id="stx-numbers">
+    <div class="stx-shell stx-numbers__grid">
+      <div class="stx-number stx-reveal">
+        <span class="stx-number__value" data-stx-count="120">0</span><span class="stx-number__plus">+</span>
+        <span class="stx-number__label">verified workers</span>
+        <svg class="stx-number__spark" viewBox="0 0 100 30"><polyline points="0,25 15,20 30,22 45,12 60,15 75,6 100,4"/></svg>
+      </div>
+      <div class="stx-number stx-reveal">
+        <span class="stx-number__value" data-stx-count="540">0</span><span class="stx-number__plus">+</span>
+        <span class="stx-number__label">projects completed</span>
+        <svg class="stx-number__spark" viewBox="0 0 100 30"><polyline points="0,26 20,18 40,20 60,10 80,14 100,2"/></svg>
+      </div>
+      <div class="stx-number stx-reveal">
+        <span class="stx-number__value" data-stx-count="48" data-stx-suffix="h">0</span>
+        <span class="stx-number__label">avg. response time</span>
+        <svg class="stx-number__spark" viewBox="0 0 100 30"><polyline points="0,10 20,16 40,8 60,20 80,12 100,18"/></svg>
+      </div>
+      <div class="stx-number stx-reveal">
+        <span class="stx-number__value" data-stx-count="4" data-stx-decimal="8">0</span>
+        <span class="stx-number__label">average rating / 5</span>
+        <svg class="stx-number__spark" viewBox="0 0 100 30"><polyline points="0,22 20,20 40,15 60,16 80,9 100,6"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="stx-contact stx-shell" id="stx-contact">
+    <div class="stx-contact__info stx-reveal">
+      <p class="stx-eyebrow">GET IN TOUCH</p>
+      <h2 class="stx-h2">Questions before you sign up?</h2>
+      <p class="stx-p">Tell us what you're working on. A real person reads every message —
+        usually within a day.</p>
+      <dl class="stx-contact__meta">
+        <div><dt>Email</dt><dd>hello@statrics.io</dd></div>
+        <div><dt>Location</dt><dd>Colombo, Sri Lanka</dd></div>
+        <div><dt>Hours</dt><dd>Mon – Fri, 9:00 – 18:00 (GMT+5:30)</dd></div>
+      </dl>
+    </div>
+
+    <form class="stx-contact__form stx-reveal" id="stx-contact-form" novalidate>
+      <div class="stx-field">
+        <label for="stx-name">Name</label>
+        <input type="text" id="stx-name" name="name" placeholder="Your full name" required>
+      </div>
+      <div class="stx-field">
+        <label for="stx-email">Email</label>
+        <input type="email" id="stx-email" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="stx-field">
+        <label for="stx-msg">Message</label>
+        <textarea id="stx-msg" name="message" rows="4" placeholder="What are you trying to solve?" required></textarea>
+      </div>
+      <button type="submit" class="stx-btn stx-btn--solid stx-btn--wide">Send message</button>
+      <p class="stx-form-note" id="stx-form-note" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="stx-footer">
+  <div class="stx-shell stx-footer__row">
+    <div class="stx-footer__brand">
+      <span class="stx-logo__word stx-logo__word--sm">STAT<span class="stx-logo__accent">RICS</span></span>
+      <p>Where data meets doers.</p>
+    </div>
+    <div class="stx-footer__cols">
+      <div>
+        <h4>Platform</h4>
+        <a href="#stx-about">About</a>
+        <a href="#stx-services">Services</a>
+        <a href="#stx-numbers">Numbers</a>
+      </div>
+      <div>
+        <h4>Get started</h4>
+        <a href="worker-home.html">Enter as Worker</a>
+        <a href="user-home.html">Enter as User</a>
+        <a href="#" data-stx-open-auth="register">Register</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:hello@statrics.io">hello@statrics.io</a>
+        <a href="#stx-contact">Contact form</a>
+      </div>
+    </div>
+  </div>
+  <div class="stx-shell stx-footer__bottom">
+    <span>© 2026 STATRICS. All rights reserved.</span>
+    <span>Built for people who show their working.</span>
+  </div>
+</footer>
+
+<!-- ============ AUTH MODAL ============ -->
+<!-- <div class="stx-modal" id="stx-auth-modal" aria-hidden="true">
+  <div class="stx-modal__backdrop" data-stx-close-auth></div>
+  <div class="stx-modal__panel" role="dialog" aria-modal="true" aria-labelledby="stx-modal-title">
+    <button class="stx-modal__close" data-stx-close-auth aria-label="Close dialog">&times;</button>
+
+    <div class="stx-modal__tabs">
+      <button type="button" class="stx-modal__tab is-active" data-stx-tab="login">Log in</button>
+      <button type="button" class="stx-modal__tab" data-stx-tab="register">Register</button>
+    </div>
+
+    <form class="stx-modal__form is-active" data-stx-panel="login">
+      <h3 id="stx-modal-title" class="stx-modal__title">Welcome back</h3>
+      <div class="stx-field">
+        <label for="stx-login-email">Email</label>
+        <input type="email" id="stx-login-email" placeholder="you@example.com" required>
+      </div>
+      <div class="stx-field">
+        <label for="stx-login-pass">Password</label>
+        <input type="password" id="stx-login-pass" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="stx-btn stx-btn--solid stx-btn--wide">Log in</button>
+      <p class="stx-modal__switch">New here? <button type="button" data-stx-tab="register">Create an account</button></p>
+    </form>
+
+    <form class="stx-modal__form" data-stx-panel="register">
+      <h3 class="stx-modal__title">Join STATRICS</h3>
+      <div class="stx-field">
+        <label for="stx-reg-name">Full name</label>
+        <input type="text" id="stx-reg-name" placeholder="Your full name" required>
+      </div>
+      <div class="stx-field">
+        <label for="stx-reg-email">Email</label>
+        <input type="email" id="stx-reg-email" placeholder="you@example.com" required>
+      </div>
+      <div class="stx-field">
+        <label for="stx-reg-pass">Password</label>
+        <input type="password" id="stx-reg-pass" placeholder="At least 8 characters" required>
+      </div>
+      <fieldset class="stx-field stx-role-select">
+        <legend>I'm joining as</legend>
+        <label class="stx-role-select__opt">
+          <input type="radio" name="stx-reg-role" value="worker" checked>
+          <span>Worker</span>
+        </label>
+        <label class="stx-role-select__opt">
+          <input type="radio" name="stx-reg-role" value="user">
+          <span>User</span>
+        </label>
+      </fieldset>
+      <button type="submit" class="stx-btn stx-btn--solid stx-btn--wide">Create account</button>
+      <p class="stx-modal__switch">Already registered? <button type="button" data-stx-tab="login">Log in</button></p>
+    </form>
+  </div> -->
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Nav scroll state ---------- */
+  var nav = document.getElementById("stx-nav");
+  var onScroll = function () {
+    if (window.scrollY > 12) nav.classList.add("is-scrolled");
+    else nav.classList.remove("is-scrolled");
+  };
+  document.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mobile menu ---------- */
+  var burger = document.getElementById("stx-burger");
+  var mobileNav = document.getElementById("stx-nav-mobile");
+  burger.addEventListener("click", function () {
+    var open = mobileNav.classList.toggle("is-open");
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  mobileNav.querySelectorAll("a, button").forEach(function (el) {
+    el.addEventListener("click", function () {
+      mobileNav.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  var revealEls = document.querySelectorAll(".stx-reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  /* ---------- Counter animation ---------- */
+  var counters = document.querySelectorAll("[data-stx-count]");
+  var animateCount = function (el) {
+    var target = parseFloat(el.getAttribute("data-stx-count"));
+    var decimals = parseInt(el.getAttribute("data-stx-decimal") || "0", 10);
+    var suffix = el.getAttribute("data-stx-suffix") || "";
+    var duration = 1400;
+    var start = null;
+
+    var step = function (ts) {
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var value = target * eased;
+      el.textContent = decimals ? value.toFixed(decimals) : Math.round(value);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = (decimals ? target.toFixed(decimals) : target) + suffix;
+    };
+    requestAnimationFrame(step);
+  };
+
+  if ("IntersectionObserver" in window) {
+    var countIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countIo.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { countIo.observe(el); });
+  } else {
+    counters.forEach(animateCount);
+  }
+
+//   /* ---------- Auth modal ---------- */
+//   var modal = document.getElementById("stx-auth-modal");
+//   var openers = document.querySelectorAll("[data-stx-open-auth]");
+//   var closers = document.querySelectorAll("[data-stx-close-auth]");
+//   var tabs = modal.querySelectorAll("[data-stx-tab]");
+//   var panels = modal.querySelectorAll("[data-stx-panel]");
+//   var lastFocused = null;
+
+//   var setTab = function (name) {
+//     tabs.forEach(function (t) {
+//       t.classList.toggle("is-active", t.getAttribute("data-stx-tab") === name);
+//     });
+//     panels.forEach(function (p) {
+//       p.classList.toggle("is-active", p.getAttribute("data-stx-panel") === name);
+//     });
+//   };
+
+//   var openModal = function (tabName) {
+//     lastFocused = document.activeElement;
+//     setTab(tabName || "login");
+//     modal.classList.add("is-open");
+//     modal.setAttribute("aria-hidden", "false");
+//     document.body.classList.add("stx-no-scroll");
+//     var firstInput = modal.querySelector(".stx-modal__form.is-active input");
+//     if (firstInput) firstInput.focus();
+//   };
+
+//   var closeModal = function () {
+//     modal.classList.remove("is-open");
+//     modal.setAttribute("aria-hidden", "true");
+//     document.body.classList.remove("stx-no-scroll");
+//     if (lastFocused) lastFocused.focus();
+//   };
+
+//   openers.forEach(function (btn) {
+//     btn.addEventListener("click", function (e) {
+//       e.preventDefault();
+//       openModal(btn.getAttribute("data-stx-open-auth"));
+//     });
+//   });
+//   closers.forEach(function (btn) {
+//     btn.addEventListener("click", closeModal);
+//   });
+//   document.addEventListener("keydown", function (e) {
+//     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+//   });
+//   tabs.forEach(function (tab) {
+//     tab.addEventListener("click", function () { setTab(tab.getAttribute("data-stx-tab")); });
+//   });
+
+//   ["stx-auth-modal"].forEach(function () {}); // no-op guard
+
+//   modal.querySelectorAll("form").forEach(function (form) {
+//     form.addEventListener("submit", function (e) {
+//       e.preventDefault();
+//       closeModal();
+//     });
+//   });
+
+  /* ---------- Contact form (front-end only) ---------- */
+  var contactForm = document.getElementById("stx-contact-form");
+  var note = document.getElementById("stx-form-note");
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    note.textContent = "Thanks — your message is ready to send once STATRICS is connected to a server.";
+    contactForm.reset();
+  });
+})();
+</script>
+</body>
+</html>
