@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialist Registration Portal</title>
+    <!-- FontAwesome Vector Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Dedicated Isolated CSS File -->
+    <link rel="stylesheet" href="../css/worker.css">
+</head>
+
+<body class="wrk-reg-body">
+
+    <div class="wrk-reg-container">
+        
+        <!-- Registration Core Header -->
+        <div class="wrk-reg-header">
+            <p class="wrk-subtitle">Expert Network Workspace</p>
+            <h2>Specialist Portal Registration</h2>
+            <p class="wrk-description">
+                Register your professional credentials to begin accepting assigned analytical repositories and advisory timeblocks. Fields marked with a red star (<span class="wrk-required">*</span>) are mandatory.
+            </p>
+        </div>
+
+        <!-- Main Form Interface Node -->
+        <div class="wrk-reg-card">
+            <h3 class="wrk-card-title">
+                <i class="fa-solid fa-id-card-clip"></i> Professional Profile Schema
+            </h3>
+
+            <form id="workerRegistrationForm" onsubmit="handleWorkerRegistration(event)">
+                
+                <!-- Row 1: Name and National Identity Card -->
+                <div class="wrk-form-grid-2">
+                    <div class="wrk-form-group">
+                        <label>Full Name <span class="wrk-required">*</span></label>
+                        <input type="text" id="workerName" required placeholder="e.g., Akeesha Piyadasa">
+                    </div>
+                    
+                    <div class="wrk-form-group">
+                        <label>National Identity Card (NIC) <span class="wrk-required">*</span></label>
+                        <input type="text" id="workerNIC" required placeholder="e.g., 2002XXXXXXXX / XXXXXXXXXV">
+                    </div>
+                </div>
+
+                <!-- Row 2: Communication Email & Telephone Routing Nodes -->
+                <div class="wrk-form-grid-2">
+                    <div class="wrk-form-group">
+                        <label>Email <span class="wrk-required">*</span></label>
+                        <input type="email" id="workerEmail" required placeholder="name@gmail.com">
+                    </div>
+
+                    <div class="wrk-form-group">
+                        <label>Contact Detail (Mobile Node) <span class="wrk-required">*</span></label>
+                        <input type="tel" id="workerPhone" required placeholder="e.g., +94 7X XXX XXXX">
+                    </div>
+                </div>
+
+                <!-- NEW Row 3: Account Security & Mask Toggle Infrastructure -->
+                <div class="wrk-form-grid-2">
+                    <div class="wrk-form-group">
+                        <label>Access Password <span class="wrk-required">*</span></label>
+                        <div class="wrk-password-wrapper">
+                            <input type="password" id="workerPassword" required placeholder="••••••••" minlength="8">
+                            <i class="fa-solid fa-eye wrk-password-toggle-icon" onclick="togglePasswordVisibility('workerPassword', this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="wrk-form-group">
+                        <label>Confirm Access Password <span class="wrk-required">*</span></label>
+                        <div class="wrk-password-wrapper">
+                            <input type="password" id="workerPasswordConfirm" required placeholder="••••••••" minlength="8">
+                            <i class="fa-solid fa-eye wrk-password-toggle-icon" onclick="togglePasswordVisibility('workerPasswordConfirm', this)"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 4: Professional Seniority & LinkedIn Verification Track -->
+                <div class="wrk-form-grid-2">
+                    <div class="wrk-form-group">
+                        <label>Years of Experience <span class="wrk-required">*</span></label>
+                        <input type="number" id="workerExperience" required min="0" max="40" placeholder="e.g., 2">
+                    </div>
+
+                    <div class="wrk-form-group">
+                        <label>LinkedIn Profile Link <span class="wrk-required">*</span></label>
+                        <input type="url" id="workerLinkedIn" required placeholder="https://www.linkedin.com/in/username">
+                    </div>
+                </div>
+
+                <!-- Row 5: Job Title Capability Selection Checkboxes -->
+                <div class="wrk-form-group">
+                    <label>Job Title Core Focus (Select all that apply) <span class="wrk-required">*</span></label>
+                    <div class="wrk-checkbox-matrix">
+                        
+                        <label class="wrk-checkbox-item">
+                            <input type="checkbox" id="chkConsultant" value="statistical_consultant" onchange="toggleDynamicFields()">
+                            <span>Statistical Consultant</span>
+                        </label>
+
+                        <label class="wrk-checkbox-item">
+                            <input type="checkbox" id="chkAnalyst" value="data_analyst" onchange="toggleDynamicFields()">
+                            <span>Data Analyst</span>
+                        </label>
+
+                        <label class="wrk-checkbox-item">
+                            <input type="checkbox" id="chkTutor" value="academic_tutor" onchange="toggleDynamicFields()">
+                            <span>Academic Peer Tutor</span>
+                        </label>
+
+                    </div>
+                </div>
+
+                <!-- ==========================================================================
+                     DYNAMIC CAPABILITY STAGING SEGMENTS (Toggled via JavaScript)
+                     ========================================================================== -->
+                
+                <!-- Dynamic Box A: Statistical Consultant Focus -->
+                <div id="fieldBoxConsultant" class="wrk-dynamic-panel">
+                    <div class="wrk-form-group">
+                        <label>Statistical Specialization Areas <span class="wrk-required">*</span></label>
+                        <input type="text" id="inputSpecialization" placeholder="e.g., Regression Analysis, Non-Parametric Frameworks, Chi-Square Testing">
+                    </div>
+                </div>
+
+                <!-- Dynamic Box B: Data Analyst Focus -->
+                <div id="fieldBoxAnalyst" class="wrk-dynamic-panel">
+                    <div class="wrk-form-group">
+                        <label>Data Analytics Tool Pathway Platforms <span class="wrk-required">*</span></label>
+                        <input type="text" id="inputPathway" placeholder="e.g., Power BI (DAX), Minitab 16, Python Pipelines (Pandas)">
+                    </div>
+                </div>
+
+                <!-- Dynamic Box C: Academic Peer Tutor Focus -->
+                <div id="fieldBoxTutor" class="wrk-dynamic-panel wrk-form-grid-3">
+                    <div class="wrk-form-group">
+                        <label>Current Cumulative GPA <span class="wrk-required">*</span></label>
+                        <input type="text" id="inputGPA" placeholder="e.g., 3.85">
+                    </div>
+                    <div class="wrk-form-group">
+                        <label>Target Degree Program <span class="wrk-required">*</span></label>
+                        <input type="text" id="inputDegree" placeholder="e.g., BSc Applied Sciences">
+                    </div>
+                    <div class="wrk-form-group">
+                        <label>Affiliated University Node <span class="wrk-required">*</span></label>
+                        <input type="text" id="inputUniversity" placeholder="e.g., University of Sri Jayewardenepura">
+                    </div>
+                </div>
+
+                <!-- Submit Action Trigger Button -->
+                <button type="submit" class="wrk-submit-btn">
+                    <i class="fa-solid fa-network-wired"></i> Register Here
+                </button>
+
+                <!-- Success Alert Window Toast -->
+                <div id="wrkSuccessToast" class="wrk-success-toast">
+                    <i class="fa-solid fa-circle-check"></i> Profile telemetry data transmitted successfully to the core admin routing queue!
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Interface Logic Core Controller -->
+    <script>
+        // Interactive Eye Visibility System Toggle
+        function togglePasswordVisibility(fieldId, iconElement) {
+            const passwordInput = document.getElementById(fieldId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = "password";
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
+            }
+        }
+
+        function toggleDynamicFields() {
+            const isConsultant = document.getElementById('chkConsultant').checked;
+            const isAnalyst = document.getElementById('chkAnalyst').checked;
+            const isTutor = document.getElementById('chkTutor').checked;
+
+            const boxConsultant = document.getElementById('fieldBoxConsultant');
+            const boxAnalyst = document.getElementById('fieldBoxAnalyst');
+            const boxTutor = document.getElementById('fieldBoxTutor');
+
+            if (isConsultant) {
+                boxConsultant.classList.add('wrk-panel-visible');
+                document.getElementById('inputSpecialization').required = true;
+            } else {
+                boxConsultant.classList.remove('wrk-panel-visible');
+                document.getElementById('inputSpecialization').required = false;
+            }
+
+            if (isAnalyst) {
+                boxAnalyst.classList.add('wrk-panel-visible');
+                document.getElementById('inputPathway').required = true;
+            } else {
+                boxAnalyst.classList.remove('wrk-panel-visible');
+                document.getElementById('inputPathway').required = false;
+            }
+
+            if (isTutor) {
+                boxTutor.classList.add('wrk-panel-visible');
+                document.getElementById('inputGPA').required = true;
+                document.getElementById('inputDegree').required = true;
+                document.getElementById('inputUniversity').required = true;
+            } else {
+                boxTutor.classList.remove('wrk-panel-visible');
+                document.getElementById('inputGPA').required = false;
+                document.getElementById('inputDegree').required = false;
+                document.getElementById('inputUniversity').required = false;
+            }
+        }
+
+        function handleWorkerRegistration(event) {
+            event.preventDefault();
+
+            // Password Equivalency Integrity Check
+            const password = document.getElementById('workerPassword').value;
+            const confirmPassword = document.getElementById('workerPasswordConfirm').value;
+
+            if (password !== confirmPassword) {
+                alert('Validation Failure: Access passwords do not match. Please re-verify.');
+                document.getElementById('workerPasswordConfirm').focus();
+                return;
+            }
+
+            // Validate checkboxes
+            const isConsultant = document.getElementById('chkConsultant').checked;
+            const isAnalyst = document.getElementById('chkAnalyst').checked;
+            const isTutor = document.getElementById('chkTutor').checked;
+
+            if (!isConsultant && !isAnalyst && !isTutor) {
+                alert('Validation Failure: You must check at least one core Job Title focus.');
+                return;
+            }
+
+            // Animate submission response toast instantly
+            const toast = document.getElementById('wrkSuccessToast');
+            toast.classList.add('wrk-toast-visible');
+
+            // Reset profile tracking states cleanly after runtime metrics pass
+            setTimeout(() => {
+                document.getElementById('workerRegistrationForm').reset();
+                toast.classList.remove('wrk-toast-visible');
+                
+                // Explicitly restore eye icons to standard view state post-reset
+                const icons = document.querySelectorAll('.wrk-password-toggle-icon');
+                icons.forEach(icon => {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                });
+                
+                // Reset inputs back to hidden passwords
+                document.getElementById('workerPassword').type = "password";
+                document.getElementById('workerPasswordConfirm').type = "password";
+
+                toggleDynamicFields(); 
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
