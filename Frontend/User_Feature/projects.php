@@ -1,4 +1,4 @@
-<?php include '../commen/header.php'; ?>
+<?php include 'userNavbar.php'; ?>
 
 <div class="section-container" style="padding-bottom: 40px;">
     <div class="section-header">
@@ -120,7 +120,7 @@
     </div>
 </div>
 
-<script>
+<script src="../javaScript/user.js">
 // Client side grid repository filtering loops
 function filterProjectCards(categoryString) {
     // Refresh filter button highlight state configurations

@@ -1,4 +1,4 @@
-<?php include '../commen/header.php'; ?>
+<?php include 'userNavbar.php'; ?>
 
 <div class="section-container" style="padding-bottom: 0;">
     <div class="section-header">
@@ -27,7 +27,7 @@
                     <li><i class="fa-solid fa-check text-blue"></i> Parametric & Non-Parametric Testing</li>
                     <li><i class="fa-solid fa-check text-blue"></i> Advanced Predictive Modeling</li>
                 </ul>
-                <a href="myProjects.php?service=data_analysis" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
+                <a onclick="navbarShift('myprojects')" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
                     <i class="fa-solid fa-bolt"></i> Get Service
                 </a>
             </div>
@@ -45,7 +45,7 @@
                     <li><i class="fa-solid fa-check text-blue"></i> Basic Descriptive Report Setups</li>
                     <li><i class="fa-solid fa-check text-blue"></i> Software Setup & Tool Navigation</li>
                 </ul>
-                <a href="myProjects.php?service=consultant_beginner" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
+                <a onclick="navbarShift('myprojects')" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
                     <i class="fa-solid fa-bolt"></i> Get Service
                 </a>
             </div>
@@ -63,7 +63,7 @@
                     <li><i class="fa-solid fa-check text-blue"></i> 1-on-1 Deep Analytical Blocks</li>
                     <li><i class="fa-solid fa-check text-blue"></i> Custom Multi-Variable Adjustments</li>
                 </ul>
-                <a href="myProjects.php?service=consultant_intermediate" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
+                    <a onclick="navbarShift('myprojects')" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
                     <i class="fa-solid fa-bolt"></i> Get Service
                 </a>
             </div>
@@ -81,7 +81,7 @@
                     <li><i class="fa-solid fa-check text-blue"></i> Thesis Methodology Auditing</li>
                     <li><i class="fa-solid fa-check text-blue"></i> Scientific Journal Format Compliance</li>
                 </ul>
-                <a href="myProjects.php?service=academic_research" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
+                <a onclick="navbarShift('myprojects')" class="cta-btn" style="text-decoration: none; text-align: center; width: 100%; padding: 10px; margin-top: auto; font-size: 14px;">
                     <i class="fa-solid fa-bolt"></i> Get Service
                 </a>
             </div>
@@ -97,5 +97,5 @@
         <button class="cta-btn" style="width: auto; padding: 12px 30px; margin: 0 auto;"><i class="fa-solid fa-calendar-check"></i> Book an Initialization Session</button>
     </div>
 </div>
-
+<script src="../javaScript/user.js"></script>
 <?php include '../commen/footer.php'; ?>

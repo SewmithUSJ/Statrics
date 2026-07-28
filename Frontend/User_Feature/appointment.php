@@ -1,4 +1,4 @@
-<?php include '../commen/header.php'; ?>
+<?php include 'userNavbar.php'; ?>
 
 <div class="section-container">
     <div class="section-header">
@@ -107,9 +107,9 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
 
-<script>
+<script src="../javaScript/user.js">
 // Live Interface State Updates
 function updateLivePreview() {
     const service = document.getElementById('serviceSelect').value;

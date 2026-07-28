@@ -12,7 +12,7 @@
 
     <div class="auth-container">
         <h2>Login to StatRics</h2>
-        <form action="#" method="POST">
+        <div">
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" required>
@@ -27,8 +27,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="auth-btn">Sign In</button>
-        </form>
+            <button type="submit" onclick=" login()" class="auth-btn">Sign In</button>
+        </div>
         <div class="auth-switch">
             Don't have an account? <a href="../User_Feature/userRegister.php">Register here</a>
         </div>
@@ -49,6 +49,59 @@
                 iconElement.classList.add("fa-eye");
                 iconElement.style.color = "#94a3b8";
             }
+        }
+
+        function login() {
+
+
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            console.log(email,password);
+            fetch("http://localhost:8080/users/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => {
+                if(!response.ok){
+                    throw new Error("Login failed");
+                }
+                console.log(response);
+                return response.json();
+            })
+            .then(user => {
+                if(user != null){
+                    console.log(user.userId);
+                    // Save user details for next pages
+                    localStorage.setItem(
+                        "userId",
+                        user.userId
+                    );
+                    localStorage.setItem(
+                        "userName",
+                        user.name
+                    );
+                    localStorage.setItem(
+                        "userEmail",
+                        user.email
+                    );
+                    alert("Login Successful");
+                    // redirect page
+                    window.location.href ="http://localhost:3000/User_Feature/home.php?id="+user.userId;
+                }
+                else{
+                    alert("Invalid Email or Password");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Server connection error");
+            });
         }
     </script>
 </body>

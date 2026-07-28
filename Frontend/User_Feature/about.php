@@ -1,4 +1,4 @@
-<?php include '../commen/header.php'; ?>
+<?php include 'userNavbar.php'; ?>
 
 
 <div class="section-container" style="padding-bottom: 80px;">
@@ -176,7 +176,7 @@
 </div>
 
 <!-- Controller Logics -->
-<script>
+<script src="../javaScript/user.js">
 function handleContactSubmission(event) {
     event.preventDefault();
     const toast = document.getElementById('abtContactToast');
@@ -202,5 +202,6 @@ function openWorkerModal(name, title, university, experience, skills, linkedinUr
 function closeWorkerModal() {
     document.getElementById('workerProfileInspectionModal').classList.remove('inspect-modal-visible');
 }
+
 </script>
 <?php include '../commen/footer.php'; ?>

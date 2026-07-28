@@ -1,5 +1,6 @@
+@ -0,0 +1,364 @@
 <?php 
-include 'userNavbar.php'; 
+include '../commen/header.php'; 
 // This relies on your updated styles.css for main theme cohesion
 ?>
 
@@ -129,7 +130,7 @@ include 'userNavbar.php';
                 <h3 class="usr-card-title"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Active Operational Streams</h3>
                 <p style="color: var(--text-muted); font-size: 12px; margin-top: -10px; margin-bottom: 20px;">Repositories successfully assigned to engineer units and actively processing.</p>
                 
-                <div class="usr-portfolio-stream" id="activeCards">
+                <div class="usr-portfolio-stream">
                     <!-- Stream Item 1 -->
                     <div class="usr-portfolio-card text-active">
                         <div class="card-meta-row">
@@ -169,7 +170,7 @@ include 'userNavbar.php';
                 <h3 class="usr-card-title"><i class="fa-solid fa-spinner fa-spin" style="color: #f59e0b;"></i> Pending Route Verification</h3>
                 <p style="color: var(--text-muted); font-size: 12px; margin-top: -10px; margin-bottom: 20px;">Applications undergoing architectural evaluation or specialist availability mapping.</p>
                 
-                <div class="usr-portfolio-stream" id="pendingCards">
+                <div class="usr-portfolio-stream">
                     <!-- Stream Item 3 -->
                     <div class="usr-portfolio-card text-pending">
                         <div class="card-meta-row">
@@ -183,43 +184,6 @@ include 'userNavbar.php';
                             <span class="action-route-link locked-link"><i class="fa-solid fa-lock"></i> Fees Locked</span>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- canceled cards -->
-            <div class="usr-panel-card">
-                <h3 class="usr-card-title"><i class="fa-solid fa-circle-xmark" style="color: #ef4444;"></i>Canceled Projects</h3>
-                <p style="color: var(--text-muted); font-size: 12px; margin-top: -10px; margin-bottom: 20px;">Projects that were canceled by the client or closed before completion.</p>
-
-                <div class="usr-portfolio-stream" id="canceledCards">
-                    <!-- Canceled Project Card -->
-                    <div class="usr-portfolio-card text-cancelled">
-                        <div class="card-meta-row">
-                            <h4>Smart Inventory Management System</h4>
-                            <span class="status-tag tag-cancelled">Canceled</span>
-                        </div>
-                        <p style="margin-bottom: 6px;">
-                            <span style="color: #ef4444; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">
-                                Service: Data Analysis
-                            </span>
-                        </p>
-
-                        <p>
-                            Project canceled due to changes in client requirements before development began.
-                        </p>
-
-                        <div class="card-action-routing-deck disabled-deck">
-                            <span class="action-route-link locked-link">
-                                <i class="fa-solid fa-ban"></i> Project Canceled
-                            </span>
-
-                            <span class="action-route-link locked-link">
-                                <i class="fa-solid fa-file-circle-xmark"></i> Closed
-                            </span>
-                        </div>
-
-                    </div>
-
                 </div>
             </div>
 
@@ -257,6 +221,85 @@ include 'userNavbar.php';
 </div>
 
 <script>
+    const user_id=1;
+    function request() {
+        console.log("ane");
+        
+        const projectTitle = document.getElementById('projTitle').value;
+        const service = document.getElementById('projService').value;
+        const about = document.getElementById('projAbout').value;
+        let extraDetails = "";
+        if (service === 'DATA_ANALYSIS' ) {
+            extraDetails = document.getElementById('daDatasetLink').value;
+        } else if (service === 'CONSULTANT_INTERMEDIATE') {
+            extraDetails = document.getElementById('ciDatasetLink').value;
+        } else if (service === 'ACADEMIC_RESEARCH') {
+            extraDetails = document.getElementById('arSubjectArea').value;
+        }else{
+            extraDetails = "none";
+        }
+        const targetDeadline = document.getElementById('projDeadline').value;
+        const budgetRange = document.getElementById('projBudget').value;
+        const status = "PENDING";
+        
+        console.log(projectTitle,service,about,targetDeadline,budgetRange ,'ssss');
+        fetch("http://localhost:8080/projects/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            projectTitle,
+            service,
+            about,
+            extraDetails,
+            targetDeadline,
+            budgetRange,
+            status,
+            user_id 
+        })
+    })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+        loadMyProjects();
+    }
+    loadMyProjects();
+    function loadMyProjects() {
+
+    fetch(`http://localhost:8080/projects/${user_id}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to load projects");
+            }
+            return response.json();
+        })
+        .then(projects => {
+
+            const container = document.getElementById("projectList");
+            // container.innerHTML = "";
+            console.log(projects);
+            projects.forEach(project => {
+
+            
+            
+
+                // container.innerHTML += `
+                //     <div class="card">
+                //         <h3>${project.projectTitle}</h3>
+                //         <p>Status : ${project.currentStatus}</p>
+                //         <p>Budget : ${project.finalBudget}</p>
+                //     </div>
+                // `;
+
+            });
+
+        })
+        // .catch(error => {
+        //     console.error(error);
+        // });
+
+        }
 // Toggle showing input blocks dynamically conditional on selected dropdown options
 function toggleConditionalFields(selectedService) {
     // Collect and hide all dynamic conditional wrappers initially
@@ -269,15 +312,15 @@ function toggleConditionalFields(selectedService) {
     });
 
     // Toggle specific matching blocks on and apply required rules safely
-    if (selectedService === 'data_analysis') {
+    if (selectedService === 'DATA_ANALYSIS') {
         const targetBlock = document.getElementById('fieldsDataAnalysis');
         targetBlock.style.display = 'block';
         targetBlock.querySelectorAll('input, textarea').forEach(input => input.setAttribute('required', 'true'));
-    } else if (selectedService === 'consultant_intermediate') {
+    } else if (selectedService === 'CONSULTANT_INTERMEDIATE') {
         const targetBlock = document.getElementById('fieldsConsultantIntermediate');
         targetBlock.style.display = 'block';
         targetBlock.querySelectorAll('input, textarea').forEach(input => input.setAttribute('required', 'true'));
-    } else if (selectedService === 'academic_research') {
+    } else if (selectedService === 'ACADEMIC_RESEARCH') {
         const targetBlock = document.getElementById('fieldsAcademicResearch');
         targetBlock.style.display = 'block';
         targetBlock.querySelectorAll('input, textarea').forEach(input => input.setAttribute('required', 'true'));
@@ -318,5 +361,5 @@ function handleCancelSubmission(event) {
     }, 4000);
 }
 </script>
-<script src="../javaScript/user.js"></script>
+
 <?php include '../commen/footer.php'; ?>

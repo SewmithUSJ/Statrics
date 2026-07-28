@@ -29,37 +29,37 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <p class="menu-category">Overview</p>
             <ul class="nav-links">
                 <li class="<?php echo ($current_page == 'home.php') ? 'active' : ''; ?>">
-                    <a href="../User_Feature/home.php"><div class="nav-item-content"><i class="fa-solid fa-house"></i> Home</div></a>
+                    <a ><div onclick="navbarShift('home')" class="nav-item-content"><i class="fa-solid fa-house"></i> Home</div></a>
                 </li>
                 <li class="<?php echo ($current_page == 'services.php') ? 'active' : ''; ?>">
-                    <a href="../User_Feature/services.php"><div class="nav-item-content"><i class="fa-solid fa-layer-group"></i> Services</div></a>
+                    <a ><div onclick="navbarShift('service')" class="nav-item-content"><i class="fa-solid fa-layer-group"></i> Services</div></a>
                 </li>
                 <li class="<?php echo ($current_page == 'myProjects.php' || $current_page == 'exploreProject.php') ? 'active' : ''; ?>">
-                    <a href="../User_Feature/myProjects.php"><div class="nav-item-content"><i class="fa-solid fa-folder-open"></i> My Projects</div></a>
+                    <a ><div onclick="navbarShift('myprojects')" class="nav-item-content"><i class="fa-solid fa-folder-open"></i> My Projects</div></a>
                 </li>
             </ul>
 
             <p class="menu-category">Engage</p>
             <ul class="nav-links">
                 <li class="<?php echo ($current_page == 'chat.php') ? 'active' : ''; ?>">
-                    <a href="../User_Feature/chat.php"><div class="nav-item-content"><i class="fa-solid fa-comment-dots"></i> Live Chat</div><span class="dot"></span></a>
+                    <a ><div onclick="navbarShift('chat')" class="nav-item-content"><i class="fa-solid fa-comment-dots"></i> Live Chat</div><span class="dot"></span></a>
                 </li>
                 <li class="<?php echo ($current_page == 'appointment.php') ? 'active' : ''; ?>">
-                    <a href="../User_Feature/appointment.php"><div class="nav-item-content"><i class="fa-solid fa-calendar-days"></i> Book Appointment</div></a>
+                    <a ><div onclick="navbarShift('appointment')" class="nav-item-content"><i class="fa-solid fa-calendar-days"></i> Book Appointment</div></a>
                 </li>
             </ul>
 
             <p class="menu-category">Billing</p>
             <ul class="nav-links">
                 <li class="<?php echo ($current_page == 'payment.php') ? 'active' : ''; ?>">
-                    <a href="../User_Feature/payment.php"><div class="nav-item-content"><i class="fa-solid fa-credit-card"></i> Plans & Payments</div></a>
+                    <a ><div onclick="navbarShift('payment')" class="nav-item-content"><i class="fa-solid fa-credit-card"></i> Plans & Payments</div></a>
                 </li>
             </ul>
 
             <p class="menu-category">Company</p>
             <ul class="nav-links">
                 <li class="<?php echo ($current_page == 'about.php') ? 'active' : ''; ?>">
-                    <a href="../User_Feature/about.php"><div class="nav-item-content"><i class="fa-solid fa-circle-info"></i> About</div></a>
+                    <a ><div onclick="navbarShift('about')" class="nav-item-content"><i class="fa-solid fa-circle-info"></i> About</div></a>
                 </li>
             </ul>
         </aside>
@@ -67,7 +67,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="main-wrapper">
             <nav class="navbar">
                 <div class="user-profile">
-                    <span>Akeesha Piyadasa</span>
+                    <span id="username">Akeesha Piyadasa</span>
                     <i class="fa-solid fa-circle-user" style="font-size: 24px;"></i>
                 </div>
             </nav>

@@ -1,4 +1,4 @@
-<?php include '../commen/header.php'; ?>
+<?php include 'userNavbar.php'; ?>
 
 <!-- Payment Page Core Layout -->
 <div class="section-container" style="padding-bottom: 20px;">
@@ -113,7 +113,7 @@
 </div>
 
 <!-- Transaction State Scripts -->
-<script>
+<script src="../javaScript/user.js">
 // Dynamic global tracking attributes
 let selectedRate = 150.00;
 let selectedLabel = "Standard Processing";

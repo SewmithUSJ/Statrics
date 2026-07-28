@@ -1,4 +1,4 @@
-<?php include '../commen/header.php'; ?>
+<?php include 'userNavbar.php'; ?>
 
 
 
@@ -85,7 +85,7 @@
     </div>
 </div>
 
-<script>
+<script src="../javaScript/user.js">
 let currentActiveProjectKey = null;
 
 function activateChatChannel(projectKey, projectTitle, assignedWorker, statusLabel) {

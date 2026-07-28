@@ -12,7 +12,7 @@
 
     <div class="auth-container">
         <h2>Create StatRics Account</h2>
-        <form action="#" method="POST" onsubmit="return validatePasswords(event)">
+        <div >
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -43,8 +43,8 @@
                 </span>
             </div>
 
-            <button type="submit" class="auth-btn">Register</button>
-        </form>
+            <button onclick="register()" class="auth-btn">Register</button>
+        </div>
         <div class="auth-switch">
             Already have an account? <a href="login.php">Login here</a>
         </div>
@@ -81,6 +81,29 @@
             }
             errorElement.style.display = 'none';
             return true;
+        }
+
+        function register() {
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            console.log(name,email,password);
+
+            fetch("http://localhost:8080/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,email,password
+        })
+    })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+            
         }
     </script>
 </body>

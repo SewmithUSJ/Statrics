@@ -21,6 +21,19 @@ public class UserController {
         return userService.saveUser(user);
     }
 
+    @PostMapping("/login")
+    public User login(@RequestBody User user){
+
+        User loginUser = userService.login(
+                user.getEmail(),
+                user.getPassword()
+        );
+        if(loginUser != null){
+            return loginUser;
+        }
+        return null;
+    }
+
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();

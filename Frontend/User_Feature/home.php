@@ -1,4 +1,4 @@
-<?php include '../commen/header.php'; ?>
+<?php include 'userNavbar.php'; ?>
 
 <section class="hero-section">
     <div class="hero-content">
@@ -117,5 +117,7 @@
         </div>
     </div>
 </section>
+
+<script src="../javaScript/user.js"></script>
 
 <?php include '../commen/footer.php'; ?>

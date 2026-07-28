@@ -1600,6 +1600,22 @@ footer {
 .usr-portfolio-card.text-active { border-left: 4px solid #10b981; }
 .usr-portfolio-card.text-pending { border-left: 4px solid #f59e0b; }
 
+.text-cancelled {
+    border-left: 4px solid #ef4444;
+}
+
+.tag-cancelled {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.locked-link {
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
 .card-meta-row {
     display: flex;
     justify-content: space-between;
