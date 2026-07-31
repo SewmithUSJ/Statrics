@@ -112,7 +112,7 @@
 <!-- ==========================================================================
      ISOLATED FINANCIAL CONTROL SCRIPTS
      ========================================================================== -->
-<script>
+<script src="../javaScript/worker.js">
     function wpayTriggerPDFGeneration() {
         const scopeSelection = document.getElementById('wpayScopeSelect').value;
         const rows = document.querySelectorAll('#wpayLedgerBody tr');

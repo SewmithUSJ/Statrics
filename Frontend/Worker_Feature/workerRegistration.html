@@ -29,18 +29,18 @@
                 <i class="fa-solid fa-id-card-clip"></i> Professional Profile Schema
             </h3>
 
-            <form id="workerRegistrationForm" onsubmit="handleWorkerRegistration(event)">
+            <div>
                 
                 <!-- Row 1: Name and National Identity Card -->
                 <div class="wrk-form-grid-2">
                     <div class="wrk-form-group">
                         <label>Full Name <span class="wrk-required">*</span></label>
-                        <input type="text" id="workerName" required placeholder="e.g., Akeesha Piyadasa">
+                        <input type="text" id="name" required placeholder="e.g., Akeesha Piyadasa">
                     </div>
                     
                     <div class="wrk-form-group">
                         <label>National Identity Card (NIC) <span class="wrk-required">*</span></label>
-                        <input type="text" id="workerNIC" required placeholder="e.g., 2002XXXXXXXX / XXXXXXXXXV">
+                        <input type="text" id="nic" required placeholder="e.g., 2002XXXXXXXX / XXXXXXXXXV">
                     </div>
                 </div>
 
@@ -48,12 +48,12 @@
                 <div class="wrk-form-grid-2">
                     <div class="wrk-form-group">
                         <label>Email <span class="wrk-required">*</span></label>
-                        <input type="email" id="workerEmail" required placeholder="name@gmail.com">
+                        <input type="email" id="email" required placeholder="name@gmail.com">
                     </div>
 
                     <div class="wrk-form-group">
                         <label>Contact Detail (Mobile Node) <span class="wrk-required">*</span></label>
-                        <input type="tel" id="workerPhone" required placeholder="e.g., +94 7X XXX XXXX">
+                        <input type="tel" id="contact" required placeholder="e.g., +94 7X XXX XXXX">
                     </div>
                 </div>
 
@@ -80,12 +80,12 @@
                 <div class="wrk-form-grid-2">
                     <div class="wrk-form-group">
                         <label>Years of Experience <span class="wrk-required">*</span></label>
-                        <input type="number" id="workerExperience" required min="0" max="40" placeholder="e.g., 2">
+                        <input type="number" id="experience" required min="0" max="40" placeholder="e.g., 2">
                     </div>
 
                     <div class="wrk-form-group">
                         <label>LinkedIn Profile Link <span class="wrk-required">*</span></label>
-                        <input type="url" id="workerLinkedIn" required placeholder="https://www.linkedin.com/in/username">
+                        <input type="url" id="linkedin" required placeholder="https://www.linkedin.com/in/username">
                     </div>
                 </div>
 
@@ -149,7 +149,7 @@
                 </div>
 
                 <!-- Submit Action Trigger Button -->
-                <button type="submit" class="wrk-submit-btn">
+                <button onclick="registerWorker()" class="wrk-submit-btn">
                     <i class="fa-solid fa-network-wired"></i> Register Here
                 </button>
 
@@ -158,7 +158,7 @@
                     <i class="fa-solid fa-circle-check"></i> Profile telemetry data transmitted successfully to the core admin routing queue!
                 </div>
 
-            </form>
+            </div>
         </div>
     </div>
 
@@ -261,6 +261,78 @@
 
                 toggleDynamicFields(); 
             }, 4000);
+        }
+        async function registerWorker() {
+            handleWorkerRegistration(event);
+
+            let workTypes = [];
+
+            // Data Analyst
+            if(document.getElementById("chkAnalyst").checked){
+
+                workTypes.push({
+                    type: "DATA_ANALYST",
+                    workTypeName: "DATA_ANALYST",
+                    pathwayPlatform: document.getElementById("inputPathway").value
+                });
+
+            }
+
+            // Academic Tutor
+            if(document.getElementById("chkTutor").checked){
+
+                workTypes.push({
+                    type: "ACADEMIC_TUTOR",
+                    workTypeName: "ACADEMIC_TUTOR",
+                    currentGPA: document.getElementById("inputGPA").value,
+                    degree: document.getElementById("inputDegree").value,
+                    university: document.getElementById("inputUniversity").value
+                });
+
+            }
+
+            // Statistical Consultant
+            if(document.getElementById("chkConsultant").checked){
+
+                workTypes.push({
+                    type: "CONSULTANT",
+                    workTypeName: "CONSULTANT",
+                    specializationArea: document.getElementById("inputSpecialization").value
+                });
+
+            }
+
+            const worker = {
+
+                name: document.getElementById("name").value,
+                NIC: document.getElementById("nic").value,
+                email: document.getElementById("email").value,
+                contact: document.getElementById("contact").value,
+                password: document.getElementById("workerPassword").value,
+                experienceYear: parseInt(document.getElementById("experience").value),
+                linkedin: document.getElementById("linkedin").value,
+
+                workTypes: workTypes
+
+            };
+            try{
+                const response = await fetch("http://localhost:8080/workers",{
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(worker)
+                });
+                if(response.ok){
+                    alert("Registration Successful");
+                    window.location.href = "workerLogin.php";
+                }else{
+                    alert("Registration Failed");
+                }
+            }catch(error){
+                console.log(error);
+            }
+
         }
     </script>
 </body>

@@ -22,6 +22,23 @@ public class MessageController {
         return messageService.saveMessage(message);
     }
 
+    @PostMapping("/{chatId}")
+    public Message sendMessage(
+            @PathVariable Long chatId,
+            @RequestBody Message message){
+
+        return messageService.sendMessage(chatId,message);
+
+    }
+
+    @GetMapping("/chat/{chatId}")
+    public List<Message> getMessages(
+            @PathVariable Long chatId){
+
+        return messageService.getMessages(chatId);
+
+    }
+
     // Get All Messages
     @GetMapping
     public List<Message> getAllMessages() {

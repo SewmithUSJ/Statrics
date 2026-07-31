@@ -638,6 +638,7 @@
     border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
+    width: 100px;
     cursor: pointer;
     transition: all 0.15s ease;
     display: flex;

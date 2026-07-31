@@ -1,37 +1,22 @@
 package org.example.statrics.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+public class AppointmentDTO {
 
-
-@Entity
-@Table(name = "appointments")
-public class Appointment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;
-
     private String date;
-
     private String time;
-
     private String description;
-
     private int durationMinutes;
-
-    @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    @JsonBackReference
-    private Project project;
 
-    public Appointment() {
-    }
+    private Long projectId;
+    private String projectTitle;
+    private ServiceType projectService;
+
+    public AppointmentDTO() {}
+
+    public AppointmentDTO(Appointment appointment) {}
 
     public Long getAppointmentId() {
         return appointmentId;
@@ -73,15 +58,35 @@ public class Appointment {
         this.durationMinutes = durationMinutes;
     }
 
-    public Project getProject() {
-        return project;
+    public AppointmentStatus getStatus() {
+        return status;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setStatus(AppointmentStatus status) {
+        this.status = status;
     }
 
-    public AppointmentStatus getStatus() {return status;}
+    public Long getProjectId() {
+        return projectId;
+    }
 
-    public void setStatus(AppointmentStatus status) {this.status = status;}
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectTitle() {
+        return projectTitle;
+    }
+
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
+    }
+
+    public ServiceType getProjectService() {
+        return projectService;
+    }
+
+    public void setProjectService(ServiceType projectService) {
+        this.projectService = projectService;
+    }
 }

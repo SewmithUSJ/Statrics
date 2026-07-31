@@ -1,3 +1,4 @@
+<?php $current_page = basename($_SERVER['PHP_SELF']); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,24 +41,30 @@
         <div class="sidebar-group-block">
             <span class="sidebar-group-title">Core Management</span>
             
-            <a href="workerMyProjects.php" class="sidebar-link-item active-route">
+            <a onclick="navbarShift('myprojects')" id="myprojects" class="sidebar-link-item <?php echo ($current_page == 'workerMyProjects.php') ? 'active-route' : ''; ?>">
                 <i class="fa-solid fa-house-laptop"></i>
                 <span>My Projects</span>
             </a>
             
-            <a href="workerChat.php" class="sidebar-link-item">
+            <a onclick="navbarShift('chat')" id="chat" class="sidebar-link-item <?php echo ($current_page == 'workerChat.php') ? 'active-route' : ''; ?>">
                 <i class="fa-solid fa-folder-tree"></i>
                 <span>Live chat</span>
-                <span class="sidebar-counter-tag count-blue">32</span>
             </a>
             
-            <a href="workerPayment.php" class="sidebar-link-item">
+            <a onclick="navbarShift('payment')" id="payment" class="sidebar-link-item <?php echo ($current_page == 'workerPayment.php') ? 'active-route' : ''; ?>">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span>Payment Records</span>
-                <span class="sidebar-counter-tag count-green">14</span>
             </a>
         </div>
-
+        <div class="sidebar-group-block" style="margin-top: 30px;">
+            <span class="sidebar-group-title">Personal details</span>          
+            <a onclick="navbarShift('profile')" id="profile" class="sidebar-link-item <?php echo ($current_page == 'workerProfile.php') ? 'active-route' : ''; ?>">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                <span>Worker Profile</span>
+            </a>
+            
+            
+        </div>
       
 
         <div class="sidebar-footer-action-block">

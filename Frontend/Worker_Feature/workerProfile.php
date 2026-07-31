@@ -147,7 +147,7 @@
 <!-- ==========================================================================
      ISOLATED PROFILE RUNTIME IMPLEMENTATION CONTROLS
      ========================================================================== -->
-<script>
+<script src="../javaScript/worker.js">
     // Toggle Profile Modal Pipeline
     function wprofToggleUpdateModal(shouldOpen) {
         const modalContainer = document.getElementById('wprofUpdateModal');

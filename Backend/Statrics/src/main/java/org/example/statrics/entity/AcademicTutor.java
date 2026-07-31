@@ -39,4 +39,7 @@ public class AcademicTutor extends WorkType {
     public void setUniversity(String university) {
         this.university = university;
     }
+
+    public void setWorkType(WorkType workType) {
+    }
 }

@@ -3,6 +3,7 @@ package org.example.statrics.controller;
 import org.example.statrics.entity.Project;
 import org.example.statrics.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,12 +35,41 @@ public class ProjectController {
         return service.getProjectByUserId(userId);
     }
 
+    @GetMapping("/unassigned")
+    public List<Project> getUnassignedProjects() {return service.getUnassignedProjects();}
+
+    @GetMapping("/worker/{workerId}")
+    public List<Project> getProjectsByWorker(@PathVariable Long workerId) {
+        return service.getProjectsByWorkerId(workerId);
+    }
+
+    @GetMapping("/worker/{workerId}/in-progress")
+    public List<Project> getWorkerInProgressProjects(
+            @PathVariable Long workerId) {
+
+        return service.getInProgressProjectsByWorker(workerId);
+    }
+
     @PutMapping("/{id}")
     public Project updateProject(@PathVariable Long id,
                                  @RequestBody Project project) {
 
         project.setProjectId(id);
         return service.updateProject(project);
+    }
+
+    @PutMapping("/{projectId}/worker/{workerId}")
+    public ResponseEntity<Project> assignWorker(
+            @PathVariable Long projectId,
+            @PathVariable Long workerId) {
+
+        Project project = service.assignWorker(projectId, workerId);
+
+        if (project == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(project);
     }
 
     @DeleteMapping("/{id}")

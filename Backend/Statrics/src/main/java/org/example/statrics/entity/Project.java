@@ -1,5 +1,6 @@
 package org.example.statrics.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "worker_id")
+    @JsonIgnore
     private Worker worker;
 
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL)

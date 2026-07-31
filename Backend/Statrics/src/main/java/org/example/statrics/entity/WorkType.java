@@ -1,10 +1,25 @@
 package org.example.statrics.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "work_types")
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = DataAnalyst.class, name = "DATA_ANALYST"),
+        @JsonSubTypes.Type(value = AcademicTutor.class, name = "ACADEMIC_TUTOR"),
+        @JsonSubTypes.Type(value = StatisticalConsultant.class, name = "CONSULTANT")
+})
 public class WorkType {
 
     @Id
@@ -15,6 +30,7 @@ public class WorkType {
 
     @ManyToOne
     @JoinColumn(name = "worker_id")
+    @JsonIgnore
     private Worker worker;
 
     public WorkType() {
