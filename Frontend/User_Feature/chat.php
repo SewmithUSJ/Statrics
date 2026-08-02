@@ -50,7 +50,7 @@
         <div style="background-color: var(--sidebar-bg); border: 1px solid #1e293b; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; position: relative;">
             
             <!-- Context Header Bar -->
-            <div id="chatActiveHeader" style="background: rgba(30, 41, 59, 0.4); padding: 20px 25px; border-bottom: 1px solid #1e293b; display: none; justify-content: space-between; align-items: center;">
+            <div id="chatActiveHeader" style="background: rgba(30, 41, 59, 0.4); padding: 20px 25px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center;">
                 <div>
                     <h3 id="txtActiveProjectTitle" style="color: white; font-size: 15px; margin: 0 0 4px 0;"></h3>
                     <p style="margin: 0; font-size: 12px; color: var(--text-muted);">
@@ -88,34 +88,35 @@
 <script>
 let currentActiveProjectKey = null;
 
-function activateChatChannel(projectKey, projectTitle, statusLabel) {
-    currentActiveProjectKey = projectKey;
-    
-    // De-activate older chip visual highlights and assign to selection
-    document.querySelectorAll('.chat-vector-card').forEach(card => card.style.borderColor = '#1e293b');
-    event.currentTarget.style.borderColor = 'var(--accent-blue)';
+const section = "chat";
 
-    // Remove the standby graphic placeholder elements
-    document.getElementById('chatLockedFallback').style.display = 'none';
-    
-    // Update structural text layers dynamically
+function activateChatChannel(card, projectKey, projectTitle, statusLabel) {
+
+    currentActiveProjectKey = projectKey;
+
+    document.querySelectorAll('.chat-vector-card').forEach(c => {
+        c.style.borderColor = '#1e293b';
+    });
+
+    card.style.borderColor = 'var(--accent-blue)';
+
     document.getElementById('txtActiveProjectTitle').innerText = projectTitle;
-    
+
     const statusBadge = document.getElementById('txtActiveStatus');
     statusBadge.innerText = statusLabel;
-    statusBadge.className = "status-tag " + (statusLabel === 'Active Execution' ? 'tag-active' : 'tag-pending');
+    statusBadge.className =
+        "status-tag " +
+        (statusLabel === 'Active Execution' ? 'tag-active' : 'tag-pending');
 
-    // Unhide main display context blocks and enable terminal elements
     document.getElementById('chatActiveHeader').style.display = 'flex';
-    
+
     const inputDeck = document.getElementById('chatInputBarDeck');
     inputDeck.style.opacity = '1';
     inputDeck.style.pointerEvents = 'auto';
-    
-    const msgInput = document.getElementById('inputChatMessage');
-    msgInput.placeholder = "Type clear requests to " +  "...";
-    msgInput.focus();
 
+    const msgInput = document.getElementById('inputChatMessage');
+    msgInput.placeholder = "Type clear requests...";
+    msgInput.focus();
 }
 </script>
 <script src="../javaScript/user.js"></script>

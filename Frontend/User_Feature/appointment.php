@@ -146,9 +146,11 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
 
-<script src="../javaScript/user.js">
+
+<script>
+
+    let section="appoinment"
 // Live Interface State Updates
 function updateLivePreview() {
     const service = document.getElementById('serviceSelect').value;
@@ -266,5 +268,9 @@ function generatePDFReceipt() {
     doc.save(`StatRics-Appointment-${date}.pdf`);
 }
 </script>
+
+<script src="../javaScript/user.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
 
 <?php include '../commen/footer.php'; ?>

@@ -33,6 +33,15 @@ fetch("http://localhost:8080/users/" + user_id)
 
 });
 
+if(section == "projects"){
+    loadProject();
+}else if (section == "chat") {
+    loadUserInProgressProjects();
+}else if (section == "appoinment") {
+    loadProjectSelection();
+    loadUserProjectsAndAppointments();
+}
+
 function request() {
         
         const projectTitle = document.getElementById('projTitle').value;
@@ -82,7 +91,6 @@ function loadProject() {
     fetch("http://localhost:8080/projects/user/"+user_id)
     .then(response => response.json())
     .then(projects => {
-        console.log(projects);
         
         let activeCards="";
         let pendingCards="";
@@ -165,14 +173,16 @@ async function loadUserInProgressProjects() {
 
         const projects = await response.json();
 
-        console.log(projects);
 
         let html = "";
 
+        console.log(projects);
+        
+        let chat;
         projects.forEach(project => {
-
+            chat = project.chatSession;
             html += `
-                <div class="chat-vector-card" onclick="loadMessages('${project.chatSession ? project.chatSession.chatId : ''}','${project.projectTitle}')" style="cursor: pointer; background: var(--bg-dark); border: 1px solid #1e293b; padding: 15px; border-radius: 10px; transition: all 0.2s;">
+                <div class="chat-vector-card" onclick="loadMessages('${chat.chatId }','${project.projectTitle}','${project.status}',this)" style="cursor: pointer; background: var(--bg-dark); border: 1px solid #1e293b; padding: 15px; border-radius: 10px; transition: all 0.2s;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
                         <strong style="color: white; font-size: 13px; display: block;">${project.projectTitle}</strong>
                         <span style="font-size: 9px; padding: 2px 6px; background: rgba(16, 185, 129, 0.08); color: #10b981; border-radius: 4px; font-weight: 600;">Active</span>
@@ -195,8 +205,11 @@ async function loadUserInProgressProjects() {
     }
 }
 let chatId=0;
-async function loadMessages(chatid,title){
-    activateChatChannel(title,title,"tag-active");
+async function loadMessages(chatid, projectTitle, status, card) {
+
+    activateChatChannel(card, chatId, projectTitle, status);
+
+
     chatId=chatid
     const response = await fetch(
         `http://localhost:8080/messages/chat/${chatId}`
@@ -248,10 +261,9 @@ async function sendUserMessage() {
 
     const data = await response.json();
 
-    console.log(data);
 
 }
-loadProjectSelection();
+
 async function loadProjectSelection() {
     try {
 
@@ -265,7 +277,6 @@ async function loadProjectSelection() {
 
         const projects = await response.json();
 
-        console.log(projects);
 
         let html = `<option value="" disabled selected>-- Select One of Your Active Projects --</option>`;
 
@@ -322,7 +333,7 @@ async function requestAppointment() {
         console.log(error);
     }
 }
-loadUserProjectsAndAppointments();
+
 async function loadUserProjectsAndAppointments() {
 
     try {
@@ -335,7 +346,6 @@ async function loadUserProjectsAndAppointments() {
 
         const data = await response.json();
 
-        console.log(data);
         let pendingAppointments = "";
         let acceptedAppointments = "";
         let rejectedAppointments = "";

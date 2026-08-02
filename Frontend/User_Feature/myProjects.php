@@ -191,6 +191,8 @@ include 'userNavbar.php';
 </div>
 
 <script>
+
+    const section = "projects";
 // Toggle showing input blocks dynamically conditional on selected dropdown options
 function toggleConditionalFields(selectedService) {
     // Collect and hide all dynamic conditional wrappers initially
