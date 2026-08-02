@@ -147,7 +147,8 @@
 <!-- ==========================================================================
      ISOLATED PROFILE RUNTIME IMPLEMENTATION CONTROLS
      ========================================================================== -->
-<script src="../javaScript/worker.js">
+<script >
+    let section = "profile";
     // Toggle Profile Modal Pipeline
     function wprofToggleUpdateModal(shouldOpen) {
         const modalContainer = document.getElementById('wprofUpdateModal');
@@ -181,5 +182,7 @@
         alert("System Notification: Local Profile Matrix configurations updated successfully.");
     }
 </script>
+
+<script src="../javaScript/worker.js"></script>
 
 <?php include '../commen/footer.php'; ?>

@@ -112,7 +112,8 @@
 <!-- ==========================================================================
      ISOLATED FINANCIAL CONTROL SCRIPTS
      ========================================================================== -->
-<script src="../javaScript/worker.js">
+<script >
+    let section = "payment";
     function wpayTriggerPDFGeneration() {
         const scopeSelection = document.getElementById('wpayScopeSelect').value;
         const rows = document.querySelectorAll('#wpayLedgerBody tr');
@@ -153,5 +154,7 @@
         }, 500);
     }
 </script>
+
+<script src="../javaScript/worker.js"></script>
 
 <?php include '../commen/footer.php'; ?>

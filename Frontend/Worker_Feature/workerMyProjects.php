@@ -1,7 +1,5 @@
 <?php include 'workerNav&sideBar.php'; ?>
 
-<?php include 'workerNav&sideBar.php'; ?>
-
 <div class="wmp-dashboard-wrapper" style="margin-left: 17%; margin-top: 5%; background-color: #0f172a; ">
     
     <!-- Workspace Control Header -->
@@ -302,6 +300,8 @@
      ISOLATED DASHBOARD MANAGEMENT SCRIPTS
      ========================================================================== -->
 <script>
+
+    let section = "projects";
     // Live Chat Initiation Function
     function wmpOpenLiveChat(projectName) {
         alert(`Opening Live Chat session for project: "${projectName}"`);

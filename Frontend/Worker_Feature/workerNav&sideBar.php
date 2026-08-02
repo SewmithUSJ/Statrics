@@ -32,7 +32,7 @@
             
             <div class="admin-profile-badge">
                 <div class="admin-avatar"><i class="fa-solid fa-user-gear"></i></div>
-                <span class="admin-name">Akeesha Piyadasa</span>
+                <span class="admin-name" id="workerName">Akeesha Piyadasa </span>
             </div>
         </div>
     </nav>

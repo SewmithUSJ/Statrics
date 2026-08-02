@@ -14,13 +14,29 @@ function navbarShift(name) {
         window.location.href ="http://localhost:3000/Frontend/Worker_Feature/workerProfile.php?id="+worker_id;
     }
 }
-unassignedProjects();
+
+fetch("http://localhost:8080/workers/"+worker_id)
+.then(response => response.json())
+.then(worker=>{
+    
+    document.getElementById("workerName").innerHTML=worker.name;
+    
+}
+)
+
+if (section == "projects") {
+    unassignedProjects();
+    loadWorkerProjects();
+    loadAppointments();
+}else if (section == "chat") {
+    loadInProgressProjects();
+}
+
 function unassignedProjects() {
         fetch("http://localhost:8080/projects/unassigned")
     .then(response => response.json())
     .then(projects => {
         let cards = "";
-        console.log(projects);
         
         projects.forEach(project =>{
             cards += `
@@ -125,7 +141,7 @@ function unassignedProjects() {
         if (response.ok) {
             const project = await response.json();
             alert("Worker assigned successfully!");
-            console.log(project);
+
         } else {
             alert("Failed");
         }
@@ -161,7 +177,7 @@ function unassignedProjects() {
         document.getElementById('wmp-count-active').innerText = `${activeItems} Active`;
         document.getElementById('wmp-count-allocated').innerText = `${allocatedItems} Awaiting Action`;
     }
-loadWorkerProjects();
+
     async function loadWorkerProjects() {
 
     try {
@@ -174,7 +190,6 @@ loadWorkerProjects();
 
         const projects = await response.json();
         let cards ="";
-        console.log(projects);
 
         projects.forEach(project =>{
             cards +=`
@@ -227,9 +242,6 @@ async function loadInProgressProjects() {
 
         const projects = await response.json();
 
-        console.log(projects);
-
-        let chatId = "";
         
         projects.forEach(project=>{
             
@@ -305,11 +317,11 @@ async function sendWorkerMessage() {
 
     const data = await response.json();
 
-    console.log(data);
+
 
 }
 
-loadAppointments();
+
 async function loadAppointments() {
 
     try {
@@ -323,8 +335,6 @@ async function loadAppointments() {
         let html = "";
         let html2 ="";
 
-        console.log(appointments);
-        
 
         appointments.forEach(app => {
 
@@ -423,7 +433,6 @@ async function updateAppointmentStatus(appointmentId, status) {
 
             alert("Status Updated");
 
-            loadAppointments(worker_id);
 
         } else {
 

@@ -50,7 +50,7 @@
         <div style="background-color: var(--sidebar-bg); border: 1px solid #1e293b; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; position: relative;">
             
             <!-- Context Header Bar -->
-            <div id="chatActiveHeader" style="background: rgba(30, 41, 59, 0.4); padding: 20px 25px; border-bottom: 1px solid #1e293b; display: none; justify-content: space-between; align-items: center;">
+            <div id="chatActiveHeader" style="background: rgba(30, 41, 59, 0.4); padding: 20px 25px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center;">
                 <div>
                     <h3 id="txtActiveProjectTitle" style="color: white; font-size: 15px; margin: 0 0 4px 0;"></h3>
                 </div>
@@ -83,6 +83,7 @@
 </div>
 
 <script >
+let section = "chat";
 let currentActiveProjectKey = null;
 
 function activateChatChannel(projectKey, projectTitle, statusLabel) {
@@ -93,7 +94,6 @@ function activateChatChannel(projectKey, projectTitle, statusLabel) {
     event.currentTarget.style.borderColor = 'var(--accent-blue)';
 
     // Remove the standby graphic placeholder elements
-    document.getElementById('chatLockedFallback').style.display = 'none';
     
     // Update structural text layers dynamically
     document.getElementById('txtActiveProjectTitle').innerText = projectTitle;
