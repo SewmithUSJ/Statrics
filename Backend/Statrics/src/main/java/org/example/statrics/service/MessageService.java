@@ -3,6 +3,7 @@ package org.example.statrics.service;
 import org.example.statrics.entity.ChatSession;
 import org.example.statrics.entity.Message;
 import org.example.statrics.repository.ChatRepository;
+
 import org.example.statrics.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,10 +45,13 @@ public class MessageService {
 
         return repository.save(existing);
     }
+
+
     public Message sendMessage(Long chatId, Message message) {
 
         ChatSession chatSession =
                 chatRepository.findById(chatId).orElse(null);
+
 
         if(chatSession == null){
             return null;
@@ -66,7 +70,9 @@ public class MessageService {
 
     }
 
+
     public void deleteMessage(Long id) {
         repository.deleteById(id);
     }
+
 }

@@ -42,4 +42,5 @@ public class AcademicTutor extends WorkType {
 
     public void setWorkType(WorkType workType) {
     }
+
 }

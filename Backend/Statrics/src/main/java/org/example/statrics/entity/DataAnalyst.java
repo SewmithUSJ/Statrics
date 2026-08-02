@@ -20,6 +20,8 @@ public class DataAnalyst extends WorkType {
         this.pathwayPlatform = pathwayPlatform;
     }
 
+
     public void setWorkType(WorkType workType) {
     }
+
 }

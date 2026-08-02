@@ -1,5 +1,6 @@
 package org.example.statrics.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -8,6 +9,7 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "work_types")
+
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -20,6 +22,7 @@ import jakarta.persistence.*;
         @JsonSubTypes.Type(value = AcademicTutor.class, name = "ACADEMIC_TUTOR"),
         @JsonSubTypes.Type(value = StatisticalConsultant.class, name = "CONSULTANT")
 })
+
 public class WorkType {
 
     @Id

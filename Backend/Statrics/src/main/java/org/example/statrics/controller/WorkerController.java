@@ -21,6 +21,7 @@ public class WorkerController {
     public Worker createWorker(@RequestBody Worker worker) {
         return workerService.saveWorker(worker);
     }
+
     @PostMapping("/login")
     public Worker login(@RequestBody Worker worker) {
 
@@ -35,6 +36,7 @@ public class WorkerController {
 
         return loggedWorker;
     }
+
     // Get All Workers
     @GetMapping
     public List<Worker> getAllWorkers() {

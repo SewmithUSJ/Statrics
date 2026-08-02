@@ -1,26 +1,81 @@
 package org.example.statrics.entity;
 
+
 public class AppointmentDTO {
 
     private Long appointmentId;
+
     private String date;
+
     private String time;
+
     private String description;
+
     private int durationMinutes;
+
+
     private AppointmentStatus status;
 
 
     private Long projectId;
+
     private String projectTitle;
-    private ServiceType projectService;
 
-    public AppointmentDTO() {}
+    private String service;
 
-    public AppointmentDTO(Appointment appointment) {}
+
+
+    public AppointmentDTO() {
+    }
+
+
+    public AppointmentDTO(Appointment appointment) {
+
+
+        this.appointmentId = appointment.getAppointmentId();
+
+        this.date = appointment.getDate();
+
+        this.time = appointment.getTime();
+
+        this.description = appointment.getDescription();
+
+        this.durationMinutes = appointment.getDurationMinutes();
+
+
+        this.status = appointment.getStatus();
+
+
+
+        if (appointment.getProject() != null) {
+
+
+            this.projectId =
+                    appointment.getProject().getProjectId();
+
+
+
+            this.projectTitle =
+                    appointment.getProject().getProjectTitle();
+
+
+
+            if (appointment.getProject().getService() != null) {
+
+                this.service =
+                        appointment.getProject()
+                                .getService()
+                                .toString();
+            }
+
+        }
+
+    }
 
     public Long getAppointmentId() {
         return appointmentId;
     }
+
 
     public void setAppointmentId(Long appointmentId) {
         this.appointmentId = appointmentId;
@@ -30,6 +85,7 @@ public class AppointmentDTO {
         return date;
     }
 
+
     public void setDate(String date) {
         this.date = date;
     }
@@ -38,6 +94,7 @@ public class AppointmentDTO {
         return time;
     }
 
+
     public void setTime(String time) {
         this.time = time;
     }
@@ -45,6 +102,7 @@ public class AppointmentDTO {
     public String getDescription() {
         return description;
     }
+
 
     public void setDescription(String description) {
         this.description = description;
@@ -62,6 +120,7 @@ public class AppointmentDTO {
         return status;
     }
 
+
     public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
@@ -78,15 +137,18 @@ public class AppointmentDTO {
         return projectTitle;
     }
 
+
     public void setProjectTitle(String projectTitle) {
         this.projectTitle = projectTitle;
     }
 
-    public ServiceType getProjectService() {
-        return projectService;
+    public String getService() {
+        return service;
     }
 
-    public void setProjectService(ServiceType projectService) {
-        this.projectService = projectService;
+
+    public void setService(String service) {
+        this.service = service;
     }
+
 }

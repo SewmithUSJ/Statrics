@@ -20,6 +20,8 @@ public class StatisticalConsultant extends WorkType {
         this.specializationArea = specializationArea;
     }
 
+
     public void setWorkType(WorkType workType) {
     }
+
 }

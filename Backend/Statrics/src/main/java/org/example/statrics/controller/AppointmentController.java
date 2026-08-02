@@ -21,8 +21,14 @@ public class AppointmentController {
 
     // Create Appointment
     @PostMapping
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return appointmentService.saveAppointment(appointment);
+
+    public ResponseEntity<Appointment> createAppointment(
+            @RequestBody Appointment appointment) {
+
+        Appointment savedAppointment = appointmentService.create(appointment);
+
+        return ResponseEntity.ok(savedAppointment);
+
     }
 
     // Get All Appointments
@@ -36,6 +42,7 @@ public class AppointmentController {
     public Optional<Appointment> getAppointmentById(@PathVariable Long id) {
         return appointmentService.getAppointmentById(id);
     }
+
     @GetMapping("/worker/{workerId}")
     public List<AppointmentDTO> getWorkerAppointments(
             @PathVariable Long workerId) {
@@ -55,6 +62,7 @@ public class AppointmentController {
 
         return ResponseEntity.ok(appointment);
     }
+
 
     // Update Appointment
     @PutMapping("/{id}")

@@ -1,8 +1,8 @@
 package org.example.statrics.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 
@@ -27,7 +27,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    @JsonBackReference
+    @JsonIgnore
     private Project project;
 
     public Appointment() {
@@ -80,6 +80,7 @@ public class Appointment {
     public void setProject(Project project) {
         this.project = project;
     }
+
 
     public AppointmentStatus getStatus() {return status;}
 

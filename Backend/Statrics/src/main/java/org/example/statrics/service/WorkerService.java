@@ -1,12 +1,16 @@
 package org.example.statrics.service;
 
+
+import org.example.statrics.entity.Worker;
 import org.example.statrics.entity.*;
+
 import org.example.statrics.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class WorkerService {
@@ -44,6 +48,7 @@ public class WorkerService {
         }
         return null;
     }
+
     public List<Worker> getAllWorkers() {
         return workerRepository.findAll();
     }

@@ -17,6 +17,7 @@ public class Worker {
     private String NIC;
 
     @Column(unique = true)
+
     private String email;
 
     private String contact;
