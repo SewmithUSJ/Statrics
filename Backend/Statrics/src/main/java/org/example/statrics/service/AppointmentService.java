@@ -1,6 +1,7 @@
 package org.example.statrics.service;
 
 import org.example.statrics.entity.Appointment;
+import org.example.statrics.entity.AppointmentStatus;
 import org.example.statrics.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,12 @@ public class AppointmentService {
 
         return repository.save(existing);
     }
+    public Appointment create(Appointment appointment) {
 
+        appointment.setStatus(AppointmentStatus.PENDING);
+
+        return repository.save(appointment);
+    }
     public void deleteAppointment(Long id) {
         repository.deleteById(id);
     }

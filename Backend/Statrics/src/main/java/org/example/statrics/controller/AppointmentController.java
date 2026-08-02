@@ -3,6 +3,7 @@ package org.example.statrics.controller;
 import org.example.statrics.entity.Appointment;
 import org.example.statrics.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,12 @@ public class AppointmentController {
 
     // Create Appointment
     @PostMapping
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return appointmentService.saveAppointment(appointment);
+    public ResponseEntity<Appointment> createAppointment(
+            @RequestBody Appointment appointment) {
+
+        Appointment savedAppointment = appointmentService.create(appointment);
+
+        return ResponseEntity.ok(savedAppointment);
     }
 
     // Get All Appointments

@@ -23,7 +23,7 @@
             <p style="color: var(--text-muted); font-size: 11px; margin-top: -10px; margin-bottom: 20px;">Select an authenticated tracking pipeline below to load human personnel assignments.</p>
             
             <!-- Stream Selection Stack -->
-            <div style="display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex-grow: 1;">
+            <div style="display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex-grow: 1;" id="userInProgressProjects">
                 
                 <!-- Project Stream 1 -->
                 <div class="chat-vector-card" onclick="activateChatChannel('presentrics', 'Presentrics Smart Attendance System', 'Akeesha Piyadasa', 'Active Execution')" style="cursor: pointer; background: var(--bg-dark); border: 1px solid #1e293b; padding: 15px; border-radius: 10px; transition: all 0.2s;">
@@ -72,12 +72,12 @@
 
             <!-- Transmission Input Dock -->
             <div id="chatInputBarDeck" style="padding: 20px 25px; background: rgba(15, 23, 42, 0.6); border-top: 1px solid #1e293b; opacity: 0.3; pointer-events: none;">
-                <form id="chatTransmissionForm" onsubmit="transmitHumanPayload(event)" style="display: flex; gap: 15px; align-items: center;">
+                <div id="chatTransmissionForm"  style="display: flex; gap: 15px; align-items: center;">
                     <input type="text" id="inputChatMessage" autocomplete="off" placeholder="Select an active project vector to type your message..." style="flex-grow: 1; padding: 12px 16px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px; font-size: 13px;">
-                    <button type="submit" class="cta-btn" style="padding: 11px 20px; white-space: nowrap; font-size: 13px; font-weight: 600;">
+                    <button onclick="sendUserMessage()"  class="cta-btn" style="padding: 11px 20px;width:auto; white-space: nowrap; font-size: 13px; font-weight: 600;">
                         <i class="fa-solid fa-paper-plane-top"></i> Send
                     </button>
-                </form>
+                </div>
             </div>
 
         </div>
@@ -85,10 +85,10 @@
     </div>
 </div>
 
-<script src="../javaScript/user.js">
+<script>
 let currentActiveProjectKey = null;
 
-function activateChatChannel(projectKey, projectTitle, assignedWorker, statusLabel) {
+function activateChatChannel(projectKey, projectTitle, statusLabel) {
     currentActiveProjectKey = projectKey;
     
     // De-activate older chip visual highlights and assign to selection
@@ -100,7 +100,6 @@ function activateChatChannel(projectKey, projectTitle, assignedWorker, statusLab
     
     // Update structural text layers dynamically
     document.getElementById('txtActiveProjectTitle').innerText = projectTitle;
-    document.getElementById('txtActiveWorker').innerText = assignedWorker + " (System Support)";
     
     const statusBadge = document.getElementById('txtActiveStatus');
     statusBadge.innerText = statusLabel;
@@ -114,47 +113,10 @@ function activateChatChannel(projectKey, projectTitle, assignedWorker, statusLab
     inputDeck.style.pointerEvents = 'auto';
     
     const msgInput = document.getElementById('inputChatMessage');
-    msgInput.placeholder = "Type clear requests to " + assignedWorker + "...";
+    msgInput.placeholder = "Type clear requests to " +  "...";
     msgInput.focus();
 
-    // Populate clear human simulation handshake records inside terminal
-    const streamContainer = document.getElementById('chatMessageStream');
-    streamContainer.innerHTML = `
-        <div style="align-self: flex-start; max-width: 75%; background: #1e293b; padding: 12px 16px; border-radius: 12px 12px 12px 0; border: 1px solid #334155;">
-            <p style="margin: 0; font-size: 12.5px; color: #f8fafc; line-height: 1.5;">
-                Greetings! This channel traces directly to your assigned workspace specialist, <strong>${assignedWorker}</strong>. Please input your structural database specifications or updates here.
-            </p>
-            <span style="font-size: 9px; color: var(--text-muted); display: block; margin-top: 5px; text-align: right;">System Node Handshake</span>
-        </div>
-    `;
-}
-
-function transmitHumanPayload(event) {
-    event.preventDefault();
-    const msgInput = document.getElementById('inputChatMessage');
-    const messageText = msgInput.value.trim();
-    if (!messageText) return;
-
-    const streamContainer = document.getElementById('chatMessageStream');
-    
-    // Append client outbound message log block inline
-    const userMsgNode = document.createElement('div');
-    userMsgNode.style.alignSelf = 'flex-end';
-    userMsgNode.style.maxWidth = '75%';
-    userMsgNode.style.background = 'var(--accent-blue)';
-    userMsgNode.style.padding = '12px 16px';
-    userMsgNode.style.borderRadius = '12px 12px 0 12px';
-    userMsgNode.innerHTML = `
-        <p style="margin: 0; font-size: 12.5px; color: white; line-height: 1.5;">${messageText}</p>
-        <span style="font-size: 9px; color: rgba(255,255,255,0.7); display: block; margin-top: 5px; text-align: right;">Sent (Human Operator)</span>
-    `;
-    
-    streamContainer.appendChild(userMsgNode);
-    msgInput.value = '';
-    
-    // Auto-scroll screen down evenly
-    streamContainer.scrollTop = streamContainer.scrollHeight;
 }
 </script>
-
+<script src="../javaScript/user.js"></script>
 <?php include '../commen/footer.php'; ?>

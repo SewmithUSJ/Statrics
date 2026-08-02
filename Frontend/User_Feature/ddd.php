@@ -1,4 +1,22 @@
-<?php include 'userNavbar.php'; ?>
+<?php include '../commen/header.php'; ?>
+
+<!-- Custom Scrollbar Styling for Status Cards -->
+<style>
+    .status-card-scroll::-webkit-scrollbar {
+        width: 5px;
+    }
+    .status-card-scroll::-webkit-scrollbar-track {
+        background: #090d16;
+        border-radius: 4px;
+    }
+    .status-card-scroll::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+    }
+    .status-card-scroll::-webkit-scrollbar-thumb:hover {
+        background: #38bdf8;
+    }
+</style>
 
 <div class="section-container">
     <div class="section-header">
@@ -18,59 +36,87 @@
     <div class="appointment-grid" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; margin-top: 30px;">
         
         <div class="appointment-card-box" style="background-color: var(--sidebar-bg); border: 1px solid #1e293b; padding: 40px; border-radius: 16px;">
+            <form id="appointmentForm" onsubmit="handleFormSubmit(event)">
+                
+                <div class="form-group">
+                    <label for="clientName">Full Name</label>
+                    <input type="text" id="clientName" value="Akeesha Piyadasa" required style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px;">
+                </div>
 
-<div id="appointmentForm" >
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="serviceSelect">Target Analytical Service</label>
+                    <select id="serviceSelect" onchange="updateLivePreview()" style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px;">
+                        <option value="InsightGather">InsightGather (Data Collection & Sampling Design)</option>
+                        <option value="StatAnalytics">StatAnalytics (Comprehensive Data Analysis)</option>
+                        <option value="OmniConsult">OmniConsult (Professional Statistical Consultancy)</option>
+                        <option value="EduScholar Support">EduScholar Support (Academic & Thesis Guidance)</option>
+                    </select>
+                </div>
 
-    <!-- Select Project Dropdown -->
-    <div class="form-group" style="margin-bottom: 20px;">
-        <label for="projectSelect" style="display: block; margin-bottom: 8px;">Select Project</label>
-        <select id="projectSelect" name="project_id" style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px; font-family: inherit; cursor: pointer;">
-            <option value="" disabled selected>-- Select One of Your Active Projects --</option>
-            <option value="1">Student Attendance Metrics Extraction Matrix</option>
-            <option value="2">AquaRelief Disaster Response Optimization Model</option>
-            <option value="3">Regional Polythene Ban Impact Correlation Study</option>
-        </select>
-    </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <label style="display: block; margin-bottom: 8px;">Consultation Mode</label>
+                    <div style="display: flex; gap: 20px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="radio" name="meetMode" value="Online" checked onchange="updateLivePreview()"> Online (Zoom / MS Teams)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="radio" name="meetMode" value="Physical" onchange="updateLivePreview()"> Physical (On-Campus/Office Location)
+                        </label>
+                    </div>
+                </div>
 
-    <!-- Description / Agenda -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="appDate">Preferred Date</label>
+                        <input type="date" id="appDate" required onchange="updateLivePreview()" style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="appTime">Preferred Time</label>
+                        <input type="time" id="appTime" required onchange="updateLivePreview()" style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px;">
+                    </div>
+                </div>
 
-    <div class="form-group">
-        <label for="description" style="display: block; margin-bottom: 8px;">Description</label>
-        <textarea id="description" name="description" rows="4" placeholder="Enter session details or agenda..."  style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
-    </div>
-
-    <!-- Date & Time Row -->
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
-        <div class="form-group">
-            <label for="appDate" style="display: block; margin-bottom: 8px;">Date</label>
-            <input type="date" id="appDate" name="date"  style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px;">
-        </div>
-       
-        <div class="form-group">
-            <label for="appTime" style="display: block; margin-bottom: 8px;">Time</label>
-            <input type="time" id="appTime" name="time" style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px;">
-        </div>
-    </div>
-
-    <!-- Duration -->
-
-    <div class="form-group" style="margin-top: 20px;">
-        <label for="durationMinutes" style="display: block; margin-bottom: 8px;">Duration (Minutes)</label>
-        <input type="number" id="durationMinutes" name="duration_minutes" min="15" step="15" placeholder="e.g. 30"  style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid #1e293b; color: white; border-radius: 8px;">
-    </div>
-
-    <!-- Submit Button -->
-
-    <button onclick="requestAppointment()" class="cta-btn" style="margin-top: 30px; width: 100%; padding: 14px; cursor: pointer;">
-        <i class="fa-solid fa-calendar-plus"></i> Request Allocation
-    </button>
-
-</div>
+                <button type="submit" class="cta-btn" style="margin-top: 30px; width: 100%; padding: 14px;"><i class="fa-solid fa-calendar-plus"></i> Request Allocation</button>
+            </form>
         </div>
 
         <div class="preview-panel" style="display: flex; flex-direction: column; gap: 20px;">
             
+            <div id="liveStatusCard" style="background-color: var(--sidebar-bg); border: 1px solid #1e293b; padding: 30px; border-radius: 16px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; width: 4px; height: 100%; background-color: var(--accent-blue);" id="statusIndicatorAccent"></div>
+                <h3 style="font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-satellite-dish" style="color: var(--accent-blue);"></i> Real-Time Processing Status
+                </h3>
+                
+                <div class="preview-item" style="margin-bottom: 12px;">
+                    <span style="font-size: 12px; color: var(--text-muted); display: block;">MATRIX SCHEDULER MATRIX TARGET</span>
+                    <strong id="prevService" style="color: white; font-size: 15px;">InsightGather</strong>
+                </div>
+                <div class="preview-item" style="margin-bottom: 12px;">
+                    <span style="font-size: 12px; color: var(--text-muted); display: block;">ENVIRONMENT MODE</span>
+                    <strong id="prevMode" style="color: #3b82f6;">Online</strong>
+                </div>
+                <div class="preview-item" style="margin-bottom: 20px;">
+                    <span style="font-size: 12px; color: var(--text-muted); display: block;">REQUESTED WINDOW TIMESTAMP</span>
+                    <strong id="prevTimestamp" style="color: white;">Not Selected</strong>
+                </div>
+
+                <div id="conflictResolutionBox" style="display: none; background: rgba(245, 158, 11, 0.1); border: 1px dashed #f59e0b; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <p style="font-size: 13px; color: #f59e0b; margin-bottom: 12px;">Appointment maked successfully!</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="resolveStatus('Accepted')" class="secondary-btn" style="padding: 6px 12px; font-size: 12px; border-color: #10b981; color: #10b981; background: transparent;">Accept This Anyway</button>
+                        <button onclick="resolveStatus('Alternative Requested')" class="secondary-btn" style="padding: 6px 12px; font-size: 12px; border-color: #f59e0b; color: #f59e0b; background: transparent;">Ask for Another Time</button>
+                    </div>
+                </div>
+
+                <div id="successStateBox" style="display: none; background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; padding: 15px; border-radius: 8px; margin-top: 15px; color: #10b981; font-size: 14px;">
+                    <i class="fa-solid fa-circle-check"></i> Allocation Parameter Finalized Successfully!
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+                 STATUS OVERVIEW CARDS WITH SCROLL (Confirmed, Cancelled, Pending)
+                 ========================================================================== -->
             <div class="status-summary-wrapper" style="display: flex; flex-direction: column; gap: 12px;">
                 
                 <!-- 1. Confirmed Appointments Card -->
@@ -81,7 +127,7 @@
                         </h4>
                         <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px;">2 Sessions</span>
                     </div>
-                    <div id="conformedCards" class="status-card-scroll" style="max-height: 120px; overflow-y: auto; padding-right: 6px; display: flex; flex-direction: column; gap: 8px;">
+                    <div class="status-card-scroll" style="max-height: 120px; overflow-y: auto; padding-right: 6px; display: flex; flex-direction: column; gap: 8px;">
                         <div style="background: var(--bg-dark); padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
                             <div style="font-size: 13px; font-weight: 600; color: #f8fafc;">StatAnalytics Sync</div>
                             <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
@@ -105,7 +151,7 @@
                         </h4>
                         <span style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px;">1 Session</span>
                     </div>
-                    <div id="penddingCards" class="status-card-scroll" style="max-height: 120px; overflow-y: auto; padding-right: 6px; display: flex; flex-direction: column; gap: 8px;">
+                    <div class="status-card-scroll" style="max-height: 120px; overflow-y: auto; padding-right: 6px; display: flex; flex-direction: column; gap: 8px;">
                         <div style="background: var(--bg-dark); padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
                             <div style="font-size: 13px; font-weight: 600; color: #f8fafc;">InsightGather Sampling Review</div>
                             <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
@@ -123,7 +169,7 @@
                         </h4>
                         <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px;">1 Session</span>
                     </div>
-                    <div id="cancelledCards" class="status-card-scroll" style="max-height: 120px; overflow-y: auto; padding-right: 6px; display: flex; flex-direction: column; gap: 8px;">
+                    <div class="status-card-scroll" style="max-height: 120px; overflow-y: auto; padding-right: 6px; display: flex; flex-direction: column; gap: 8px;">
                         <div style="background: var(--bg-dark); padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
                             <div style="font-size: 13px; font-weight: 600; color: #f8fafc;">OmniConsult Exploratory Session</div>
                             <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
@@ -134,6 +180,7 @@
                 </div>
 
             </div>
+
             <div id="pdfDownloadCard" style="background-color: var(--sidebar-bg); border: 1px solid #1e293b; padding: 30px; border-radius: 16px; display: none; text-align: center;">
                 <i class="fa-solid fa-file-pdf" style="font-size: 48px; color: #ef4444; margin-bottom: 15px;"></i>
                 <h4>Appointment Documentation Formatted</h4>
@@ -142,13 +189,12 @@
             </div>
 
         </div>
-        
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<script src="../javaScript/user.js">
+<script>
 // Live Interface State Updates
 function updateLivePreview() {
     const service = document.getElementById('serviceSelect').value;

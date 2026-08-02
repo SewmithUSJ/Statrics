@@ -1,5 +1,6 @@
 package org.example.statrics.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class Project {
     private User user;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "worker_id")
     private Worker worker;
 

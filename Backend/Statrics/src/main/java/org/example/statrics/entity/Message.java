@@ -1,5 +1,6 @@
 package org.example.statrics.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.example.statrics.entity.SenderType;
 
@@ -23,6 +24,7 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "chat_id")
+    @JsonIgnore
     private ChatSession chatSession;
 
     public Message() {

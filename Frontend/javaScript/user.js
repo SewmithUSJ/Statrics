@@ -76,11 +76,14 @@ function request() {
         .catch(error => console.error(error));
         loadProject();
     }
+    
 function loadProject() {
     
     fetch("http://localhost:8080/projects/user/"+user_id)
     .then(response => response.json())
     .then(projects => {
+        console.log(projects);
+        
         let activeCards="";
         let pendingCards="";
         let canceledCards="";
@@ -147,3 +150,231 @@ function loadProject() {
         document.getElementById('canceledCards').innerHTML=canceledCards;
     });
 }
+
+async function loadUserInProgressProjects() {
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:8080/projects/user/${user_id}/in-progress`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load projects");
+        }
+
+        const projects = await response.json();
+
+        console.log(projects);
+
+        let html = "";
+
+        projects.forEach(project => {
+
+            html += `
+                <div class="chat-vector-card" onclick="loadMessages('${project.chatSession ? project.chatSession.chatId : ''}','${project.projectTitle}')" style="cursor: pointer; background: var(--bg-dark); border: 1px solid #1e293b; padding: 15px; border-radius: 10px; transition: all 0.2s;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                        <strong style="color: white; font-size: 13px; display: block;">${project.projectTitle}</strong>
+                        <span style="font-size: 9px; padding: 2px 6px; background: rgba(16, 185, 129, 0.08); color: #10b981; border-radius: 4px; font-weight: 600;">Active</span>
+                    </div>
+                    <span style="font-size: 11px; color: var(--text-muted); display: block;"><i class="fa-solid fa-user-tie"></i> ${project.service}</span>
+                </div>
+            `;
+
+        });
+
+         document.getElementById("userInProgressProjects").innerHTML = html;
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("userInProgressProjects").innerHTML =
+            "<p>Unable to load projects.</p>";
+
+    }
+}
+let chatId=0;
+async function loadMessages(chatid,title){
+    activateChatChannel(title,title,"tag-active");
+    chatId=chatid
+    const response = await fetch(
+        `http://localhost:8080/messages/chat/${chatId}`
+    );
+
+    const messages = await response.json();
+
+    let html = "";
+
+    messages.forEach(msg=>{
+
+        if (msg.senderType === 'USER') {
+            html +=`
+            <div style="align-self: flex-end; max-width:75%; background:var(--accent-blue); padding:12px 16px; border-radius: 12px 12px 0 12px; border: 1px solid #334155;">
+                <p style="margin: 0; font-size: 12.5px; color: white; line-height: 1.5;"> ${msg.content}</p>
+            </div>`
+        } else {
+            html +=`
+                <div style="align-self: flex-start; max-width: 75%; background: #1e293b; padding: 12px 16px; border-radius: 12px 12px 12px 0; border: 1px solid #334155;">
+                    <p style="margin: 0; font-size: 12.5px; color: #f8fafc; line-height: 1.5;">${msg.content}</p>
+                </div>
+            `
+        }
+
+    });
+
+    document.getElementById("chatMessageStream").innerHTML = html;
+
+}
+
+async function sendUserMessage() {
+
+
+    const message = {
+        senderType: "USER",
+        content: document.getElementById("inputChatMessage").value
+    };
+
+    const response = await fetch(
+        `http://localhost:8080/messages/${chatId}`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(message)
+        }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
+}
+loadProjectSelection();
+async function loadProjectSelection() {
+    try {
+
+        const response = await fetch(
+            `http://localhost:8080/projects/user/${user_id}/in-progress`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load projects");
+        }
+
+        const projects = await response.json();
+
+        console.log(projects);
+
+        let html = `<option value="" disabled selected>-- Select One of Your Active Projects --</option>`;
+
+        projects.forEach(project => {
+
+            html += `
+                <option value="${project.projectId}">${project.projectTitle}</option>
+            `;
+
+        });
+
+         document.getElementById("projectSelect").innerHTML = html;
+
+    }catch (error) {
+
+        console.error(error);
+
+        document.getElementById("projectSelect").innerHTML =
+            "<p>Unable to load projects.</p>";
+
+    }
+}
+
+
+async function requestAppointment() {
+
+    const appointment = {
+        date: document.getElementById("appDate").value,
+        time: document.getElementById("appTime").value,
+        description: document.getElementById("description").value,
+        durationMinutes: document.getElementById("durationMinutes").value,
+        project: {
+            projectId: document.getElementById("projectSelect").value
+        }
+    };
+
+    try {
+
+        const response = await fetch("http://localhost:8080/appointments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(appointment)
+        });
+
+        if (response.ok) {
+            alert("Appointment request sent.");
+        } else {
+            alert("Failed to send request.");
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+loadUserProjectsAndAppointments();
+async function loadUserProjectsAndAppointments() {
+
+    try {
+
+        const response = await fetch(`http://localhost:8080/projects/user/${user_id}/appointments`);
+
+        if (!response.ok) {
+            throw new Error("Failed to load data");
+        }
+
+        const data = await response.json();
+
+        console.log(data);
+        let pendingAppointments = "";
+        let acceptedAppointments = "";
+        let rejectedAppointments = "";
+
+        data.forEach(appointment =>{
+            if (appointment.appointmentStatus === "PENDING") {
+                pendingAppointments +=`
+                <div style="background: var(--bg-dark); padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                    <div style="font-size: 13px; font-weight: 600; color: #f8fafc;">${appointment.projectTitle}</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+                        <i class="fa-regular fa-calendar"></i> ${appointment.date} @ ${appointment.time} • <span style="color: #38bdf8;">Online</span>
+                    </div>
+                </div>`
+            } else if(appointment.appointmentStatus === "ACCEPTED"){
+                acceptedAppointments +=`
+                <div style="background: var(--bg-dark); padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                    <div style="font-size: 13px; font-weight: 600; color: #f8fafc;">${appointment.projectTitle}</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+                        <i class="fa-regular fa-calendar"></i>${appointment.date} @ ${appointment.time} • <span style="color: #a78bfa;">Physical</span>
+                    </div>
+                </div>`
+            }else if(appointment.appointmentStatus === "REJECTED"){
+                rejectedAppointments +=`
+                <div style="background: var(--bg-dark); padding: 10px; border-radius: 6px; border: 1px solid #1e293b;">
+                    <div style="font-size: 13px; font-weight: 600; color: #f8fafc;">${appointment.projectTitle}</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+                        <i class="fa-regular fa-calendar"></i> ${appointment.date} @ ${appointment.time} • <span style="color: #ef4444;">Cancelled by woker</span>
+                    </div>
+                </div>`
+            }
+        })
+
+        document.getElementById("conformedCards").innerHTML = acceptedAppointments;
+        document.getElementById("penddingCards").innerHTML = pendingAppointments;
+        document.getElementById("cancelledCards").innerHTML = rejectedAppointments;
+        
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+

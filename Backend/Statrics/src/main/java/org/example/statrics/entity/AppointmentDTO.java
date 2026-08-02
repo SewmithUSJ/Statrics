@@ -1,34 +1,19 @@
 package org.example.statrics.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+public class AppointmentDTO {
 
-
-@Entity
-@Table(name = "appointments")
-public class Appointment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;
-
     private String date;
-
     private String time;
-
     private String description;
-
     private int durationMinutes;
+    private String appointmentStatus;
+    private Long projectId;
+    private String projectTitle;
+    private String service;
+    private String status;
 
-    @Enumerated(EnumType.STRING)
-    private AppointmentStatus status;
-
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    @JsonIgnore
-    private Project project;
-
-    public Appointment() {
+    public AppointmentDTO() {
     }
 
     public Long getAppointmentId() {
@@ -71,19 +56,45 @@ public class Appointment {
         this.durationMinutes = durationMinutes;
     }
 
-    public Project getProject() {
-        return project;
+    public String getAppointmentStatus() {
+        return appointmentStatus;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setAppointmentStatus(String appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
     }
 
-    public AppointmentStatus getStatus() {
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectTitle() {
+        return projectTitle;
+    }
+
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(AppointmentStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }
+
+

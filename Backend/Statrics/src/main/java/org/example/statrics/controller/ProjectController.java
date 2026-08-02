@@ -1,6 +1,8 @@
 package org.example.statrics.controller;
 
+import org.example.statrics.entity.AppointmentDTO;
 import org.example.statrics.entity.Project;
+import org.example.statrics.entity.ProjectAppointmentDTO;
 import org.example.statrics.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,20 @@ public class ProjectController {
     @GetMapping("/user/{userId}")
     public List<Project> getProjectsByUser(@PathVariable Long userId) {
         return service.getProjectByUserId(userId);
+    }
+
+    @GetMapping("/user/{userId}/in-progress")
+    public List<Project> getUserInProgressProjects(
+            @PathVariable Long userId) {
+
+        return service.getUserInProgressProjects(userId);
+    }
+
+    @GetMapping("/user/{userId}/appointments")
+    public List<AppointmentDTO> getProjectsAndAppointments(
+            @PathVariable Long userId) {
+
+        return service.getProjectsAndAppointments(userId);
     }
 
     @PutMapping("/{id}")

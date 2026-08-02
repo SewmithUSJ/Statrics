@@ -1,5 +1,6 @@
 package org.example.statrics.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ public class Payment {
 
     @OneToOne
     @JoinColumn(name = "project_id")
+    @JsonIgnore
     private Project project;
 
     public Payment() {
