@@ -35,8 +35,8 @@ public class ProjectController {
         return service.getProjectByUserId(userId);
     }
 
-    @GetMapping("/unassigned")
-    public List<Project> getUnassignedProjects() {return service.getUnassignedProjects();}
+    @GetMapping("/unassigned/{workerId}")
+    public List<Project> getUnassignedProjects(@PathVariable Long workerId) {return service.getUnassignedProjects( workerId);}
 
     @GetMapping("/worker/{workerId}")
     public List<Project> getProjectsByWorker(@PathVariable Long workerId) {

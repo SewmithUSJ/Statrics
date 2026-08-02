@@ -2,13 +2,13 @@ package org.example.statrics.repository;
 
 import org.example.statrics.entity.Project;
 import org.example.statrics.entity.ProjectStatus;
+import org.example.statrics.entity.ServiceType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByUserUserId(Long userId);
 
-    List<Project> findByWorkerIsNull();
 
     List<Project> findByWorkerWorkerId(Long workerId);
 
@@ -16,4 +16,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             Long workerId,
             ProjectStatus status
     );
+
+    List<Project> findByWorkerIsNullAndServiceIn(List<ServiceType> services);
 }

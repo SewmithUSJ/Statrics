@@ -33,7 +33,7 @@ if (section == "projects") {
 }
 
 function unassignedProjects() {
-        fetch("http://localhost:8080/projects/unassigned")
+        fetch("http://localhost:8080/projects/unassigned/"+worker_id)
     .then(response => response.json())
     .then(projects => {
         let cards = "";
