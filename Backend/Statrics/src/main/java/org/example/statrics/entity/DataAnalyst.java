@@ -19,4 +19,9 @@ public class DataAnalyst extends WorkType {
     public void setPathwayPlatform(String pathwayPlatform) {
         this.pathwayPlatform = pathwayPlatform;
     }
+
+
+    public void setWorkType(WorkType workType) {
+    }
+
 }

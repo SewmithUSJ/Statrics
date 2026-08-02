@@ -35,8 +35,10 @@ public class Project {
     private User user;
 
     @ManyToOne
-    @JsonIgnore
+
     @JoinColumn(name = "worker_id")
+    @JsonIgnore
+
     private Worker worker;
 
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL)

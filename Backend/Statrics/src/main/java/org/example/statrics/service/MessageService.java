@@ -2,6 +2,8 @@ package org.example.statrics.service;
 
 import org.example.statrics.entity.ChatSession;
 import org.example.statrics.entity.Message;
+import org.example.statrics.repository.ChatRepository;
+
 import org.example.statrics.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class MessageService {
 
     @Autowired
     private MessageRepository repository;
+
+    @Autowired
+    private ChatRepository chatRepository;
 
     public Message saveMessage(Message message) {
         return repository.save(message);
@@ -41,14 +46,12 @@ public class MessageService {
         return repository.save(existing);
     }
 
-    public void deleteMessage(Long id) {
-        repository.deleteById(id);
-    }
 
     public Message sendMessage(Long chatId, Message message) {
 
         ChatSession chatSession =
-                repository.findById(chatId).orElse(null).getChatSession();
+                chatRepository.findById(chatId).orElse(null);
+
 
         if(chatSession == null){
             return null;
@@ -65,6 +68,11 @@ public class MessageService {
         return repository
                 .findByChatSessionChatIdOrderByTimeStampAsc(chatId);
 
+    }
+
+
+    public void deleteMessage(Long id) {
+        repository.deleteById(id);
     }
 
 }

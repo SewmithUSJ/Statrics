@@ -1,6 +1,8 @@
 package org.example.statrics.controller;
 
 import org.example.statrics.entity.Appointment;
+import org.example.statrics.entity.AppointmentDTO;
+import org.example.statrics.entity.AppointmentStatus;
 import org.example.statrics.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,14 @@ public class AppointmentController {
 
     // Create Appointment
     @PostMapping
+
     public ResponseEntity<Appointment> createAppointment(
             @RequestBody Appointment appointment) {
 
         Appointment savedAppointment = appointmentService.create(appointment);
 
         return ResponseEntity.ok(savedAppointment);
+
     }
 
     // Get All Appointments
@@ -38,6 +42,27 @@ public class AppointmentController {
     public Optional<Appointment> getAppointmentById(@PathVariable Long id) {
         return appointmentService.getAppointmentById(id);
     }
+
+    @GetMapping("/worker/{workerId}")
+    public List<AppointmentDTO> getWorkerAppointments(
+            @PathVariable Long workerId) {
+
+        return appointmentService.getWorkerAppointments(workerId);
+    }
+    @PutMapping("/{appointmentId}/status")
+    public ResponseEntity<Appointment> updateStatus(
+            @PathVariable Long appointmentId,
+            @RequestBody AppointmentStatus status) {
+
+        Appointment appointment = appointmentService.updateStatus(appointmentId, status);
+
+        if (appointment == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(appointment);
+    }
+
 
     // Update Appointment
     @PutMapping("/{id}")

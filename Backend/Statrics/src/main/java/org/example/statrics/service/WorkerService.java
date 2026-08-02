@@ -1,11 +1,16 @@
 package org.example.statrics.service;
 
+
 import org.example.statrics.entity.Worker;
+import org.example.statrics.entity.*;
+
 import org.example.statrics.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class WorkerService {
@@ -15,10 +20,35 @@ public class WorkerService {
 
     // Save Worker
     public Worker saveWorker(Worker worker) {
+
+        if (worker.getWorkTypes() != null) {
+            for (WorkType workType : worker.getWorkTypes()) {
+                workType.setWorker(worker);
+            }
+        }
+
         return workerRepository.save(worker);
     }
-
     // Get All Workers
+
+//    public Worker saveWorker(Worker worker) {
+//        return workerRepository.save(worker);
+//    }
+
+    public Worker login(String email, String password) {
+
+//        return workerRepository
+//                .findByEmailAndPassword(email, password)
+//                .orElse(null);
+        Optional<Worker> worker = workerRepository.findByEmail(email);
+
+        if (worker.isPresent() &&
+                worker.get().getPassword().equals(password)) {
+            return worker.get();
+        }
+        return null;
+    }
+
     public List<Worker> getAllWorkers() {
         return workerRepository.findAll();
     }

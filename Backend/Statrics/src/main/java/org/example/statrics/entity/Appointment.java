@@ -1,6 +1,8 @@
 package org.example.statrics.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 
@@ -79,11 +81,8 @@ public class Appointment {
         this.project = project;
     }
 
-    public AppointmentStatus getStatus() {
-        return status;
-    }
 
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
+    public AppointmentStatus getStatus() {return status;}
+
+    public void setStatus(AppointmentStatus status) {this.status = status;}
 }
